@@ -1,0 +1,147 @@
+import 'package:flutter/material.dart';
+import '../providers/category_provider.dart';
+import '../widgets/about_me.dart';
+import '../widgets/button_custom.dart';
+import 'package:provider/provider.dart';
+
+import '../screens/add_category.dart';
+import '../providers/app_theme_provider.dart';
+import '../variable/config/app_config.dart';
+import '../variable/colors/color_pallete.dart';
+import '../widgets/edit_category.dart';
+
+class SettingsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    print(MediaQuery.of(context).platformBrightness);
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 14.0, vertical: 10.0),
+            child: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                Text(
+                  'Utama',
+                  style: TextStyle(
+                      fontSize: 18.0, color: colorPallete.greyTransparent),
+                ),
+                Divider(color: colorPallete.dividerDynamicColor(context)),
+                SizedBox(height: 5),
+                Card(
+                  margin: EdgeInsets.zero,
+                  child: Column(
+                    children: <Widget>[
+                      listTileSettings(
+                        onTap: () => showBottomSheet(
+                          context: context,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(40),
+                            ),
+                          ),
+                          builder: (smbContext) {
+                            return AddCategory();
+                          },
+                        ),
+                        context: context,
+                        icon: Icons.add,
+                        title: 'Tambah Kategori',
+                        subtitle:
+                            'Kamu Bisa Menambahkan Kategori Sesuai Keinginanmu',
+                      ),
+                      Divider(color: colorPallete.dividerDynamicColor(context)),
+                      Consumer<AppThemeProvider>(
+                        builder: (_, atProvider, __) => listTileSettings(
+                          context: context,
+                          icon: atProvider.isDarkMode
+                              ? Icons.brightness_3
+                              : Icons.wb_sunny,
+                          title: 'Tema Aplikasi',
+                          subtitle: 'Atur Tema Aplikasimu',
+                          trailing: Switch.adaptive(
+                            value: atProvider.isDarkMode,
+                            onChanged: (value) => atProvider.setAppTheme(value),
+                          ),
+                        ),
+                      ),
+                      Divider(color: colorPallete.dividerDynamicColor(context)),
+                      Consumer<CategoryProvider>(
+                        builder: (_, ctgProvider, __) => listTileSettings(
+                          icon: Icons.category,
+                          enabled: ctgProvider.allCategoryItem.length == 0
+                              ? false
+                              : true,
+                          title: 'Ubah Kategori',
+                          subtitle: 'Ubah Nama atau Icon Kategorimu',
+                          context: context,
+                          onTap: ctgProvider.allCategoryItem.length == 0
+                              ? null
+                              : () => showBottomSheet(
+                                    context: context,
+                                    builder: (smbContext) => EditCategory(),
+                                  ),
+                        ),
+                      ),
+                      Divider(color: colorPallete.dividerDynamicColor(context)),
+                      listTileSettings(
+                        icon: Icons.supervised_user_circle,
+                        title: 'Tentang Pengembang',
+                        subtitle: 'Informasi Tentang Pengembang Aplikasi',
+                        context: context,
+                        onTap: () => showBottomSheet(
+                          context: context,
+                          builder: (sbmContext) => AboutMe(),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: ButtonCustom(
+            buttonColor: Theme.of(context).accentColor,
+            buttonTitle: appConfig.buttonTitleReviewUs,
+            onPressed: () => print('Rate Us'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  InkWell listTileSettings({
+    @required IconData icon,
+    @required String title,
+    @required String subtitle,
+    @required BuildContext context,
+    bool enabled = true,
+    Widget trailing,
+    Function onTap,
+  }) =>
+      InkWell(
+        onTap: onTap,
+        child: ListTile(
+          enabled: enabled,
+          leading: CircleAvatar(
+            backgroundColor: colorPallete.cardDynamicColor(context),
+            child: Icon(
+              icon,
+              color:
+                  colorPallete.circleAvatarIconDynamicColor(context: context),
+            ),
+          ),
+          title: Text(title),
+          subtitle: Text(
+            subtitle,
+            style: TextStyle(fontSize: 12.0),
+          ),
+          trailing: trailing,
+        ),
+      );
+}
