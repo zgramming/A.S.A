@@ -1,3 +1,4 @@
+import 'package:atur_semua_aktifitas/providers/global_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:launch_review/launch_review.dart';
 import '../providers/category_provider.dart';
@@ -106,10 +107,13 @@ class SettingsScreen extends StatelessWidget {
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: ButtonCustom(
-            buttonColor: Theme.of(context).accentColor,
-            buttonTitle: appConfig.buttonTitleReviewUs,
-            onPressed: () => LaunchReview.launch(),
+          child: Consumer<GlobalProvider>(
+            builder: (_, gProvider, __) => ButtonCustom(
+              buttonColor: Theme.of(context).accentColor,
+              buttonTitle: appConfig.buttonTitleReviewUs,
+              onPressed: () =>
+                  LaunchReview.launch(androidAppId: gProvider.projectAppID),
+            ),
           ),
         ),
       ],
