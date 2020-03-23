@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../providers/category_provider.dart';
-// import '../models/activity/activity_model.dart';
 import '../providers/main_calendar_provider.dart';
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
@@ -10,7 +11,6 @@ import '../widgets/button_custom.dart';
 import '../widgets/fetch_card_category.dart';
 import '../function/show_snackbar_message.dart';
 import '../widgets/textformfield_custom.dart';
-import 'package:provider/provider.dart';
 
 class AddActivityScreen extends StatefulWidget {
   static String routeName = '/add-activity-screen';
