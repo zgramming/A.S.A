@@ -97,7 +97,11 @@ class DBHelper {
 
   Future<List<CategoryModel>> fetchCategory() async {
     final db = await database();
-    final result = await db.query(appConfig.tableCategory);
+    String orderBy = 'created_date DESC';
+    final result = await db.query(
+      appConfig.tableCategory,
+      orderBy: orderBy,
+    );
     final categoryList =
         result.map((fromMap) => CategoryModel.fromSqflite(fromMap)).toList();
     // print('Result fetch Category $result');

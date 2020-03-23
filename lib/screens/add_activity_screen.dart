@@ -11,6 +11,7 @@ import '../widgets/button_custom.dart';
 import '../widgets/fetch_card_category.dart';
 import '../function/show_snackbar_message.dart';
 import '../widgets/textformfield_custom.dart';
+import '../screens/add_category.dart';
 
 class AddActivityScreen extends StatefulWidget {
   static String routeName = '/add-activity-screen';
@@ -21,6 +22,7 @@ class AddActivityScreen extends StatefulWidget {
 
 class _AddActivityScreenState extends State<AddActivityScreen> {
   final _formKey = GlobalKey<FormState>();
+
   String titleForm;
   String informationForm;
 
@@ -147,9 +149,21 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                                 ),
                               ),
                               title: 'Tanggal'),
-                          formatColumn(
-                            widget: FetchCardCategory(),
-                            title: 'Kategori',
+                          Builder(
+                            builder: (currentContext) => formatColumn(
+                              widget: FetchCardCategory(),
+                              title: 'Kategori',
+                              enableIconAdd: true,
+                              onTap: () => showBottomSheet(
+                                context: currentContext,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(40),
+                                  ),
+                                ),
+                                builder: (smbContext) => AddCategory(),
+                              ),
+                            ),
                           ),
                           formatColumn(
                             widget: TextFormFieldCustom(
@@ -199,16 +213,30 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
   Column formatColumn({
     @required Widget widget,
     @required String title,
+    Function onTap,
+    bool enableIconAdd = false,
   }) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            children: <Widget>[
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              enableIconAdd
+                  ? IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: onTap,
+                      tooltip: 'Tambah Kategori',
+                    )
+                  : SizedBox(),
+            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
           ),
           SizedBox(height: 10),
           widget,

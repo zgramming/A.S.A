@@ -71,6 +71,9 @@ class CategoryProvider extends ChangeNotifier {
     );
     await db.insertCategory(newCategory);
     _allCategoryItem.add(newCategory);
+
+    /// Sort By Descending
+    _allCategoryItem.sort((a, b) => b.createdDate.compareTo(a.createdDate));
     notifyListeners();
   }
 
