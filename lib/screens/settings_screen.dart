@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:launch_review/launch_review.dart';
 import '../providers/category_provider.dart';
 import '../widgets/about_me.dart';
 import '../widgets/button_custom.dart';
@@ -108,7 +109,7 @@ class SettingsScreen extends StatelessWidget {
           child: ButtonCustom(
             buttonColor: Theme.of(context).accentColor,
             buttonTitle: appConfig.buttonTitleReviewUs,
-            onPressed: () => '',
+            onPressed: () => LaunchReview.launch(),
           ),
         ),
       ],
