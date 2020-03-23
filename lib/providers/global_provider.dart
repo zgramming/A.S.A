@@ -1,11 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info/package_info.dart';
 import 'package:get_version/get_version.dart';
 
 class GlobalProvider extends ChangeNotifier {
   GlobalProvider() {
-    _getPackageInfo();
     _getVersion();
   }
 
@@ -34,26 +32,6 @@ class GlobalProvider extends ChangeNotifier {
   }
 
   //! Get Device Info Like AppName , Version etc.
-
-  PackageInfo _packageInfo = PackageInfo(
-    appName: 'Unknown',
-    buildNumber: 'Unknown',
-    packageName: 'Unkwon',
-    version: 'Unknown',
-  );
-  PackageInfo get packageInfo => _packageInfo;
-  String get appNamePackageInfo => packageInfo.appName;
-  String get buildNumberPackageInfo => packageInfo.buildNumber;
-  String get packageNamePackageInfo => packageInfo.packageName;
-  String get versionPackageInfo => packageInfo.version;
-
-  Future<PackageInfo> _getPackageInfo() async {
-    final result = await PackageInfo.fromPlatform();
-    _packageInfo = result;
-    notifyListeners();
-    return result;
-  }
-
   String _platformVersion = 'Unknown';
   String _projectVersion = '';
   String _projectCode = '';
