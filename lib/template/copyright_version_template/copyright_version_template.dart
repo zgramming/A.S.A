@@ -18,17 +18,18 @@ class CopyRightVersion extends StatefulWidget {
 class _CopyRightVersionState extends State<CopyRightVersion> {
   @override
   Widget build(BuildContext context) {
-    final globalProvider = Provider.of<GlobalProvider>(context);
     return DefaultTextStyle(
       style: TextStyle(color: widget.colorText),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Text(
-            "${globalProvider.appNamePackageInfo} | Version ${globalProvider.versionPackageInfo}",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          Consumer<GlobalProvider>(
+            builder: (_, gProvider, __) => Text(
+              "${gProvider.projectName} | Version ${gProvider.projectVersion}",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
           ),
           Text(
             widget.copyRight,

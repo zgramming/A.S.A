@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
+import 'package:get_version/get_version.dart';
 
 class GlobalProvider extends ChangeNotifier {
   GlobalProvider() {
     _getPackageInfo();
+    _getVersion();
   }
 
   //! For BottomNavigationBarCustom On Tap
@@ -52,6 +54,30 @@ class GlobalProvider extends ChangeNotifier {
     return result;
   }
 
+  String _platformVersion = 'Unknown';
+  String _projectVersion = '';
+  String _projectCode = '';
+  String _projectAppID = '';
+  String _projectName = '';
+
+  String get platformVersion => _platformVersion;
+  String get projectVersion => _projectVersion;
+  String get projectCode => _projectCode;
+  String get projectAppID => _projectAppID;
+  String get projectName => _projectName;
+
+  Future _getVersion() async {
+    try {
+      _platformVersion = await GetVersion.platformVersion;
+      _projectVersion = await GetVersion.projectVersion;
+      _projectCode = await GetVersion.projectCode;
+      _projectAppID = await GetVersion.appID;
+      _projectName = await GetVersion.appName;
+      notifyListeners();
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
   //!======================================================================================================================================================================
 
   //! Hide and Show Password TextFormFieldCustom
