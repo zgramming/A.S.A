@@ -108,7 +108,7 @@ class SettingsScreen extends StatelessWidget {
           child: ButtonCustom(
             buttonColor: Theme.of(context).accentColor,
             buttonTitle: appConfig.buttonTitleReviewUs,
-            onPressed: () => print('Rate Us'),
+            onPressed: () => '',
           ),
         ),
       ],
