@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/activity/activity_model.dart';
+
+import '../../network/models/activity/activity_model.dart';
+
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
 import '../variable/sizes/sizes.dart';

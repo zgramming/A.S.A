@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import '../helper/sqflite_helper.dart';
-import '../models/activity/activity_model.dart';
+import '../../src/network/helper/sqflite_helper.dart';
+import '../../src/network/models/activity/activity_model.dart';
 
 class MainCalendarProvider extends ChangeNotifier {
   /// Melakukan Inisialisasi agar script dibawah ini langsung berjalan

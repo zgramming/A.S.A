@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-import './providers/category_provider.dart';
-import 'providers/app_theme_provider.dart';
-import 'providers/global_provider.dart';
-import 'providers/main_calendar_provider.dart';
-import 'screens/add_activity_screen.dart';
-import 'screens/splash_screen.dart';
-import 'screens/welcome_screen.dart';
-import 'variable/colors/color_pallete.dart';
+import './src/providers/category_provider.dart';
+import './src/providers/app_theme_provider.dart';
+import './src/providers/global_provider.dart';
+import './src/providers/main_calendar_provider.dart';
+
+import './src/ui/screens/add_activity_screen.dart';
+import './src/ui/screens/splash_screen.dart';
+import './src/ui/screens/welcome_screen.dart';
+import './src/ui/variable/colors/color_pallete.dart';
 
 void main() async {
   runApp(

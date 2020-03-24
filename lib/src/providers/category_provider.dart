@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
-import '../helper/sqflite_helper.dart';
-import '../models/category/category_model.dart';
+
+import '../../src/network/helper/sqflite_helper.dart';
+import '../../src/network/models/category/category_model.dart';
 
 class CategoryProvider extends ChangeNotifier {
   CategoryProvider() {

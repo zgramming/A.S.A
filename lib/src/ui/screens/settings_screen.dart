@@ -1,13 +1,14 @@
-import 'package:atur_semua_aktifitas/providers/global_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:launch_review/launch_review.dart';
-import '../providers/category_provider.dart';
+
+import '../../providers/category_provider.dart';
+import '../../providers/app_theme_provider.dart';
+import '../../providers/global_provider.dart';
+
 import '../widgets/about_me.dart';
 import '../widgets/button_custom.dart';
-import 'package:provider/provider.dart';
-
 import '../screens/add_category.dart';
-import '../providers/app_theme_provider.dart';
 import '../variable/config/app_config.dart';
 import '../variable/colors/color_pallete.dart';
 import '../widgets/edit_category.dart';

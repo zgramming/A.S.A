@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../providers/category_provider.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/category_provider.dart';
 import '../variable/colors/color_pallete.dart';
 import '../variable/sizes/sizes.dart';
 import '../widgets/empty_category.dart';
-import 'package:provider/provider.dart';
 
 class FetchCardCategory extends StatefulWidget {
   @override

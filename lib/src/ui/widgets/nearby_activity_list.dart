@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
-import '../models/activity/activity_model.dart';
-import '../providers/main_calendar_provider.dart';
+
+import '../../network/models/activity/activity_model.dart';
+import '../../providers/main_calendar_provider.dart';
+
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
 import '../variable/sizes/sizes.dart';

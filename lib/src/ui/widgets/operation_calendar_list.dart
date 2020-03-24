@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import '../models/activity/activity_model.dart';
+
+import './delete_activity_list.dart';
+import './detail_activity_list.dart';
+
+import '../../network/models/activity/activity_model.dart';
+
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
 import '../variable/sizes/sizes.dart';
-import 'delete_activity_list.dart';
-import 'detail_activity_list.dart';
 
 class OperationCalendarList extends StatelessWidget {
   final ActivityModel activityModel;

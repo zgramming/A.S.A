@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/main_calendar_provider.dart';
+import '../../providers/main_calendar_provider.dart';
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
 import '../variable/sizes/sizes.dart';

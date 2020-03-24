@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iconpicker/flutter_iconpicker.dart';
+import 'package:provider/provider.dart';
+
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
 import '../variable/sizes/sizes.dart';
 import '../widgets/button_custom.dart';
 import '../widgets/textformfield_custom.dart';
-import 'package:flutter_iconpicker/flutter_iconpicker.dart';
-import 'package:provider/provider.dart';
-import '../providers/category_provider.dart';
+import '../../providers/category_provider.dart';
 
 class AddCategory extends StatefulWidget {
   @override

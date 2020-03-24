@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/activity/activity_model.dart';
-import '../providers/main_calendar_provider.dart';
 import 'package:provider/provider.dart';
+
+import '../../network/models/activity/activity_model.dart';
+import '../../providers/main_calendar_provider.dart';
 
 class DeleteActivityList extends StatelessWidget {
   const DeleteActivityList({

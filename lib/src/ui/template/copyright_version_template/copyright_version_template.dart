@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../providers/global_provider.dart';
+
+import '../../../providers/global_provider.dart';
 
 class CopyRightVersion extends StatefulWidget {
   final String copyRight;
