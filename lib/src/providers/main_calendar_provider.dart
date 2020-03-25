@@ -128,6 +128,8 @@ class MainCalendarProvider extends ChangeNotifier {
       informationActivity: informationActivity,
       idActivity: idActivity,
     );
+
+    /// Mencari SelectedActivity Item Berdasarkan IDnya, Ketika sudah ketemu update valuenya berdarkan property yang ada.
     _selectedActivityItem
         .where((where) => where.idActivity == idActivity)
         .forEach((value) {

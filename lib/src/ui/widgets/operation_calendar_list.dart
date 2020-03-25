@@ -68,6 +68,8 @@ class OperationCalendarList extends StatelessWidget {
                       isVisible:
                           activityModel.isDoneActivity == 1 ? false : true,
                       onTap: () {
+                        /// Menutup BottomSheet Sebelum Navigasi Ke Edit Activity
+                        Navigator.of(context).pop();
                         final dateTimeActivity =
                             DateTime.parse(activityModel.dateTimeActivity);
                         DateTime initialDateCupertino = dateTimeActivity;
