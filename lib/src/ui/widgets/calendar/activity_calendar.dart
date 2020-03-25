@@ -49,24 +49,18 @@ class _ActivityCalendarState extends State<ActivityCalendar> {
           events: mcProvider.activityBasedOnDate,
           onDaySelected: widget.onDaySelected,
           onDayLongPressed: (date, activity) {
-            DateTime dateRevision = DateTime(
-              date.year,
-              date.month,
-              date.day,
-            );
-            Navigator.of(context).pushNamed(
-              AddActivityScreen.routeName,
-              arguments: {'dateRevision': dateRevision},
-            );
+            DateTime dateRevision = DateTime(date.year, date.month, date.day);
+            mcProvider.setDateOnLongPressCalendar(dateRevision);
+            Navigator.of(context).pushNamed(AddActivityScreen.routeName);
           },
           builders: CalendarBuilders(
-            markersBuilder: (context, date, activitys, holidays) {
+            markersBuilder: (context, date, activitiy, holidays) {
               /// Digunakan Untuk Mendapatkan Jumlah Aktifitas Yang Belum Selesai
               final Iterable result =
-                  activitys.where((element) => element.isDoneActivity == 0);
+                  activitiy.where((element) => element.isDoneActivity == 0);
               final int activityUnfinished = result.length;
               final children = <Widget>[];
-              if (activitys.isNotEmpty) {
+              if (activitiy.isNotEmpty) {
                 children.add(
                   Positioned(
                     right: 1,
@@ -74,7 +68,7 @@ class _ActivityCalendarState extends State<ActivityCalendar> {
                     child: ActivityCalendarMarker(
                       calendarController: _calendarController,
                       date: date,
-                      activity: activitys,
+                      activity: activitiy,
                       activityUnFinished: activityUnfinished,
                     ),
                   ),

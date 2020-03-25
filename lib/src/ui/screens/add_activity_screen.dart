@@ -1,3 +1,4 @@
+import 'package:atur_semua_aktifitas/src/network/models/activity/activity_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,12 +26,33 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
 
   String titleForm;
   String informationForm;
+  String appBarTitle;
+
+  ActivityModel editArgs;
+  DateTime dateTimeActivityArgs;
 
   @override
-  void initState() {
-    super.initState();
-    titleForm = '';
-    informationForm = '';
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    checkArgs();
+  }
+
+  void checkArgs() async {
+    final args = ModalRoute.of(context).settings.arguments;
+    if (args == null) {
+      print('Args Is Null');
+      appBarTitle = 'Tambah Aktifitas';
+      titleForm = '';
+      informationForm = '';
+      return null;
+    } else {
+      print('Args is available');
+      appBarTitle = 'Edit Aktifitas';
+      editArgs = args;
+      titleForm = editArgs.titleActivity;
+      informationForm = editArgs.informationActivity;
+      dateTimeActivityArgs = DateTime.parse(editArgs.dateTimeActivity);
+    }
   }
 
   void _validate({
@@ -49,18 +71,20 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
     } else {
       if (form.validate()) {
         form.save();
-        await mcProvider.addingActivity(
-          idActivity: dateNow.toString(),
-          titleActivity: titleForm,
-          dateTimeActivity:
-              mcProvider.selectedDateFromCupertinoDatePicker.toString(),
-          isDoneActivity: 0,
-          codeIconActivity: ctgProvider.selectedIconCodeCardCategory,
-          informationActivity: informationForm,
-          createdDateActivity: dateNow.toString(),
-        );
-        ctgProvider.resetSelectedIndexAndIconCodeCardCategory();
-        mcProvider.resetSelectedDateFromCupertinoDatePicker();
+        if (editArgs == null) {
+          await mcProvider.addingActivity(
+            idActivity: dateNow.toString(),
+            titleActivity: titleForm,
+            dateTimeActivity:
+                mcProvider.selectedDateFromCupertinoDatePicker.toString(),
+            isDoneActivity: 0,
+            codeIconActivity: ctgProvider.selectedIconCodeCardCategory,
+            informationActivity: informationForm,
+            createdDateActivity: dateNow.toString(),
+          );
+          ctgProvider.resetSelectedIndexAndIconCodeCardCategory();
+          mcProvider.resetSelectedDateFromCupertinoDatePicker();
+        } else {}
 
         Navigator.of(context).pop(true);
       } else {
@@ -71,13 +95,11 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final Map result = ModalRoute.of(context).settings.arguments as Map;
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Tambah Aktifitas'),
+          title: Text(appBarTitle),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -114,6 +136,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                               prefixIcon: Icon(Icons.title),
                               radius: 50,
                               isDone: true,
+                              initialValue: titleForm,
                             ),
                             title: 'Judul ',
                           ),
@@ -134,16 +157,22 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                                         ),
                                       ),
                                     ),
-                                    child: CupertinoDatePicker(
-                                      initialDateTime: result['dateRevision'],
-                                      minimumDate: result['dateRevision'],
-                                      use24hFormat: true,
-                                      onDateTimeChanged: (dateChange) {
-                                        mcProvider
-                                            .setSelectedDateFromCupertinoDatePicker(
-                                          dateChange,
-                                        );
-                                      },
+                                    child: Consumer<MainCalendarProvider>(
+                                      builder: (_, mcProvider, __) =>
+                                          CupertinoDatePicker(
+                                        initialDateTime: editArgs == null
+                                            ? mcProvider.dateOnLongPressCalendar
+                                            : dateTimeActivityArgs,
+                                        minimumDate:
+                                            mcProvider.dateOnLongPressCalendar,
+                                        use24hFormat: true,
+                                        onDateTimeChanged: (dateChange) {
+                                          mcProvider
+                                              .setSelectedDateFromCupertinoDatePicker(
+                                            dateChange,
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -176,6 +205,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                               minLines: 3,
                               maxLines: 5,
                               isValidatorEnable: false,
+                              initialValue: informationForm,
                             ),
                             title: 'Keterangan',
                           ),

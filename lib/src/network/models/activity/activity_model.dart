@@ -17,14 +17,14 @@ class ActivityModel {
     this.createdDateActivity,
   });
 
-  ActivityModel.fromSqflite(Map<String, dynamic> map)
-      : idActivity = map['id_activity'],
-        titleActivity = map['title_activity'],
-        dateTimeActivity = map['datetime_activity'],
-        isDoneActivity = map['is_done_activity'],
-        codeIconActivity = map['code_icon_activity'],
-        informationActivity = map['information_activity'],
-        createdDateActivity = map['created_date'];
+  ActivityModel.fromSqflite(Map<String, dynamic> json)
+      : idActivity = json['id_activity'],
+        titleActivity = json['title_activity'],
+        dateTimeActivity = json['datetime_activity'],
+        isDoneActivity = json['is_done_activity'],
+        codeIconActivity = json['code_icon_activity'],
+        informationActivity = json['information_activity'],
+        createdDateActivity = json['created_date'];
 
   Map<String, dynamic> toMapForSqflite() {
     return {

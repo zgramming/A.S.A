@@ -1,3 +1,4 @@
+import 'package:atur_semua_aktifitas/src/ui/screens/add_activity_screen.dart';
 import 'package:flutter/material.dart';
 
 import './delete_activity_list.dart';
@@ -62,6 +63,10 @@ class OperationCalendarList extends StatelessWidget {
                     icon: Icons.edit,
                     title: appConfig.edit,
                     isVisible: activityModel.isDoneActivity == 1 ? false : true,
+                    onTap: () => Navigator.of(context).pushNamed(
+                      AddActivityScreen.routeName,
+                      arguments: activityModel,
+                    ),
                   ),
                   SizedBox(width: 15),
                   circleOperationCalendarList(
@@ -123,4 +128,32 @@ class OperationCalendarList extends StatelessWidget {
           ],
         ),
       );
+}
+
+class EditActivity extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        width: MediaQuery.of(context).size.width - 10,
+        height: MediaQuery.of(context).size.height - 80,
+        padding: EdgeInsets.all(20),
+        color: Colors.white,
+        child: Column(
+          children: [
+            RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Save",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: const Color(0xFF1BC0C5),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }

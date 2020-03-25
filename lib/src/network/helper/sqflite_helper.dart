@@ -64,7 +64,6 @@ class DBHelper {
 
   Future<int> updateIconCategory(int newCodeIcon, String idCategory) async {
     final db = await database();
-
     final result = await db.rawUpdate(
       '''
     UPDATE ${appConfig.tableCategory} SET code_icon_category = ? WHERE id_category = ?

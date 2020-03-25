@@ -49,7 +49,7 @@ class MainCalendarScreen extends StatelessWidget {
               builder: (_, mcProvider, __) {
                 final yearMonthDayFormat =
                     DateFormat.yMMMMd(appConfig.indonesiaLocale)
-                        .format(mcProvider.dateActivity);
+                        .format(mcProvider.dateSelectedActivityItem);
                 return Text(
                   yearMonthDayFormat,
                   textAlign: TextAlign.right,
@@ -66,7 +66,7 @@ class MainCalendarScreen extends StatelessWidget {
           Consumer<MainCalendarProvider>(
             builder: (_, mcProvider, __) => ActivityCalendarList(
               selectedActivity: mcProvider.selectedActivityItem,
-              dateActivity: mcProvider.dateActivity,
+              dateActivity: mcProvider.dateSelectedActivityItem,
             ),
           ),
         ],

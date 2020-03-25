@@ -4,6 +4,7 @@ import '../../src/network/models/activity/activity_model.dart';
 
 class MainCalendarProvider extends ChangeNotifier {
   /// Melakukan Inisialisasi agar script dibawah ini langsung berjalan
+
   MainCalendarProvider() {
     getUnFinishedActivity();
     getNearby10Activity();
@@ -12,8 +13,10 @@ class MainCalendarProvider extends ChangeNotifier {
   }
   DBHelper db = DBHelper();
 
-  DateTime _dateActivity = DateTime.now();
+  DateTime _dateSelectedActivityItem = DateTime.now();
   DateTime _selectedDateFromCupertinoDatePicker;
+  DateTime _dateOnLongPressCalendar;
+
   Map<DateTime, List<ActivityModel>> _activityBasedOnDate = {};
 
   List<ActivityModel> _nearby10ActivityItem = [];
@@ -21,9 +24,11 @@ class MainCalendarProvider extends ChangeNotifier {
   List<ActivityModel> _selectedActivityItem = [];
   List<ActivityModel> _allActivityItem = [];
 
-  DateTime get dateActivity => _dateActivity;
+  DateTime get dateSelectedActivityItem => _dateSelectedActivityItem;
   DateTime get selectedDateFromCupertinoDatePicker =>
       _selectedDateFromCupertinoDatePicker;
+  DateTime get dateOnLongPressCalendar => _dateOnLongPressCalendar;
+
   Map<DateTime, List<ActivityModel>> get activityBasedOnDate =>
       _activityBasedOnDate;
 
@@ -32,10 +37,15 @@ class MainCalendarProvider extends ChangeNotifier {
   List<ActivityModel> get unFinishedActivity => [..._unFinishedActivityItem];
   List<ActivityModel> get allActivity => [..._allActivityItem];
 
+  void setDateOnLongPressCalendar(DateTime dateFromOnLongPressCalendar) {
+    _dateOnLongPressCalendar = dateFromOnLongPressCalendar;
+    notifyListeners();
+  }
+
   void setSelectedListAndDateActivity(
-      List<ActivityModel> selectedActivity, DateTime dateActivity) {
+      List<ActivityModel> selectedActivity, DateTime dateSelectedActivityItem) {
     _selectedActivityItem = selectedActivity;
-    _dateActivity = dateActivity;
+    _dateSelectedActivityItem = dateSelectedActivityItem;
     notifyListeners();
   }
 
@@ -89,6 +99,9 @@ class MainCalendarProvider extends ChangeNotifier {
 
     /// Sorting The SelectedItem
     sortSelectedItemActivity();
+
+    /// Reset Calendar
+    resetSelectedDateFromCupertinoDatePicker();
 
     /// Update The UI
     notifyListeners();
