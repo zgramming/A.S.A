@@ -21,21 +21,24 @@ class NearbyActivityList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GroupedListView<ActivityModel, DateTime>(
+    return GroupedListView<ActivityModel, String>(
       shrinkWrap: true,
       groupBy: (ActivityModel element) {
+        /// Disini Berfungsi Untuk Group List berdasarkan Format Tanggal, Bulan , Tahun => 25 Maret 2020
         DateTime convertStringToDateTime =
             DateTime.parse(element.dateTimeActivity);
-        return convertStringToDateTime;
+        return DateFormat.yMMMMd(appConfig.indonesiaLocale)
+            .format(convertStringToDateTime);
       },
       elements: limitedActivityList,
       sort: true,
       physics: NeverScrollableScrollPhysics(),
       groupSeparatorBuilder: (value) {
+        /// Return Dari Group Tadi ditampilkan disini
         return Padding(
           padding: const EdgeInsets.all(14.0),
           child: Text(
-            DateFormat.yMMMMd(appConfig.indonesiaLocale).format(value),
+            value,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         );
