@@ -60,7 +60,7 @@ class _ActivityCalendarState extends State<ActivityCalendar> {
             );
             DateTime minimumDateCupertino =
                 DateTime(date.year, date.month, date.day);
-            mcProvider.setDateOnLongPressCalendar(
+            mcProvider.setDateCupertinoDatePicker(
               initialDateCupertino: initialDateCupertino,
               minDateCupertino: minimumDateCupertino,
             );

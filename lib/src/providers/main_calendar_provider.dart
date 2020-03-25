@@ -39,7 +39,7 @@ class MainCalendarProvider extends ChangeNotifier {
   List<ActivityModel> get unFinishedActivity => [..._unFinishedActivityItem];
   List<ActivityModel> get allActivity => [..._allActivityItem];
 
-  void setDateOnLongPressCalendar({
+  void setDateCupertinoDatePicker({
     DateTime initialDateCupertino,
     DateTime minDateCupertino,
   }) {

@@ -1,5 +1,7 @@
+import 'package:atur_semua_aktifitas/src/providers/main_calendar_provider.dart';
 import 'package:atur_semua_aktifitas/src/ui/screens/add_activity_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './delete_activity_list.dart';
 import './detail_activity_list.dart';
@@ -57,15 +59,32 @@ class OperationCalendarList extends StatelessWidget {
                     },
                   ),
                   SizedBox(width: 15),
-                  circleOperationCalendarList(
-                    context: context,
-                    colorCircle: Colors.blue,
-                    icon: Icons.edit,
-                    title: appConfig.edit,
-                    isVisible: activityModel.isDoneActivity == 1 ? false : true,
-                    onTap: () => Navigator.of(context).pushNamed(
-                      AddActivityScreen.routeName,
-                      arguments: activityModel,
+                  Consumer<MainCalendarProvider>(
+                    builder: (_, mcProvider, __) => circleOperationCalendarList(
+                      context: context,
+                      colorCircle: Colors.blue,
+                      icon: Icons.edit,
+                      title: appConfig.edit,
+                      isVisible:
+                          activityModel.isDoneActivity == 1 ? false : true,
+                      onTap: () {
+                        final dateTimeActivity =
+                            DateTime.parse(activityModel.dateTimeActivity);
+                        DateTime initialDateCupertino = dateTimeActivity;
+                        DateTime minDateCupertino = DateTime(
+                          dateTimeActivity.year,
+                          dateTimeActivity.month,
+                          dateTimeActivity.day,
+                        );
+                        mcProvider.setDateCupertinoDatePicker(
+                          initialDateCupertino: initialDateCupertino,
+                          minDateCupertino: minDateCupertino,
+                        );
+                        Navigator.of(context).pushNamed(
+                          AddActivityScreen.routeName,
+                          arguments: activityModel,
+                        );
+                      },
                     ),
                   ),
                   SizedBox(width: 15),
