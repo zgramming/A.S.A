@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart' as path;
 
@@ -114,6 +115,23 @@ class DBHelper {
       conflictAlgorithm: sql.ConflictAlgorithm.replace,
     );
     // print('result from insert Activity :$result');
+    return result;
+  }
+
+  Future<int> updateActivity({
+    @required String titleActivity,
+    @required String dateTimeActivity,
+    @required String informationActivity,
+    @required String idActivity,
+  }) async {
+    //TODO Belum Pakai Icon Updatenya
+    final db = await database();
+    final result = await db.rawUpdate('''
+      UPDATE ${appConfig.tableActivity}
+      SET title_activity = ? , datetime_activity = ? , information_activity = ?
+      WHERE id_activity = ?
+      ''', [titleActivity, dateTimeActivity, informationActivity, idActivity]);
+    print('Result update all value Activity =$result');
     return result;
   }
 

@@ -15,7 +15,8 @@ class AppConfig {
   final String informationCategoryText = 'Keterangan Kategori';
 
   /// Add Activity Screen
-  final String snackbarErrorDateText = 'ERROR : Tanggal Sudah Lewat';
+  final String snackbarErrorDateText =
+      'ERROR : Tanggal / Waktu Sudah Lewat Sudah Lewat';
   final int durationSnackbarErrorDateText = 2;
 
   ///SplashScreen

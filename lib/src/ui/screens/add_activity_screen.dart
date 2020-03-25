@@ -72,6 +72,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
       if (form.validate()) {
         form.save();
         if (editArgs == null) {
+          /// Ini Buat Tambah Activity
           await mcProvider.addingActivity(
             idActivity: dateNow.toString(),
             titleActivity: titleForm,
@@ -82,10 +83,18 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
             informationActivity: informationForm,
             createdDateActivity: dateNow.toString(),
           );
-          ctgProvider.resetSelectedIndexAndIconCodeCardCategory();
-          mcProvider.resetSelectedDateFromCupertinoDatePicker();
-        } else {}
-
+        } else {
+          /// Ini Buat Edit Activity
+          await mcProvider.updateActivity(
+            titleActivity: titleForm,
+            dateTimeActivity:
+                mcProvider.selectedDateFromCupertinoDatePicker.toString(),
+            informationActivity: informationForm,
+            idActivity: editArgs.idActivity,
+          );
+        }
+        ctgProvider.resetSelectedIndexAndIconCodeCardCategory();
+        mcProvider.resetSelectedDateFromCupertinoDatePicker();
         Navigator.of(context).pop(true);
       } else {
         return null;
@@ -161,10 +170,10 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                                       builder: (_, mcProvider, __) =>
                                           CupertinoDatePicker(
                                         initialDateTime: editArgs == null
-                                            ? mcProvider.dateOnLongPressCalendar
+                                            ? mcProvider.initialDateCupertino
                                             : dateTimeActivityArgs,
                                         minimumDate:
-                                            mcProvider.dateOnLongPressCalendar,
+                                            mcProvider.minDateCupertino,
                                         use24hFormat: true,
                                         onDateTimeChanged: (dateChange) {
                                           mcProvider

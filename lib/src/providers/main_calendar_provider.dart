@@ -15,7 +15,8 @@ class MainCalendarProvider extends ChangeNotifier {
 
   DateTime _dateSelectedActivityItem = DateTime.now();
   DateTime _selectedDateFromCupertinoDatePicker;
-  DateTime _dateOnLongPressCalendar;
+  DateTime _initialDateCupertino;
+  DateTime _minDateCupertino;
 
   Map<DateTime, List<ActivityModel>> _activityBasedOnDate = {};
 
@@ -27,7 +28,8 @@ class MainCalendarProvider extends ChangeNotifier {
   DateTime get dateSelectedActivityItem => _dateSelectedActivityItem;
   DateTime get selectedDateFromCupertinoDatePicker =>
       _selectedDateFromCupertinoDatePicker;
-  DateTime get dateOnLongPressCalendar => _dateOnLongPressCalendar;
+  DateTime get minDateCupertino => _minDateCupertino;
+  DateTime get initialDateCupertino => _initialDateCupertino;
 
   Map<DateTime, List<ActivityModel>> get activityBasedOnDate =>
       _activityBasedOnDate;
@@ -37,8 +39,15 @@ class MainCalendarProvider extends ChangeNotifier {
   List<ActivityModel> get unFinishedActivity => [..._unFinishedActivityItem];
   List<ActivityModel> get allActivity => [..._allActivityItem];
 
-  void setDateOnLongPressCalendar(DateTime dateFromOnLongPressCalendar) {
-    _dateOnLongPressCalendar = dateFromOnLongPressCalendar;
+  void setDateOnLongPressCalendar({
+    DateTime initialDateCupertino,
+    DateTime minDateCupertino,
+  }) {
+    _initialDateCupertino = initialDateCupertino;
+    _minDateCupertino = minDateCupertino;
+
+    /// Memberi Nilai Ke Tanggal Cupertino DatePicker
+    setSelectedDateFromCupertinoDatePicker(initialDateCupertino);
     notifyListeners();
   }
 
@@ -88,14 +97,14 @@ class MainCalendarProvider extends ChangeNotifier {
     /// Insert Data To All Activity List
     _unFinishedActivityItem.add(newActivity);
 
+    /// Adding Activity To SelectedActivity
+    _selectedActivityItem.add(newActivity);
+
     /// Load Data From SQFLite
     _nearby10ActivityItem = await db.fetch10Activity();
 
-    /// Adding Count To Calendar
+    /// Refresh Count In Calendar
     _activityBasedOnDate = await getActivityBasedOnDate();
-
-    /// Adding Activity To SelectedActivity
-    _selectedActivityItem.add(newActivity);
 
     /// Sorting The SelectedItem
     sortSelectedItemActivity();
@@ -104,6 +113,31 @@ class MainCalendarProvider extends ChangeNotifier {
     resetSelectedDateFromCupertinoDatePicker();
 
     /// Update The UI
+    notifyListeners();
+  }
+
+  Future<void> updateActivity({
+    @required String titleActivity,
+    @required String dateTimeActivity,
+    @required String informationActivity,
+    @required String idActivity,
+  }) async {
+    await db.updateActivity(
+      titleActivity: titleActivity,
+      dateTimeActivity: dateTimeActivity,
+      informationActivity: informationActivity,
+      idActivity: idActivity,
+    );
+    _selectedActivityItem
+        .where((where) => where.idActivity == idActivity)
+        .forEach((value) {
+      value.titleActivity = titleActivity;
+      value.dateTimeActivity = dateTimeActivity;
+      value.informationActivity = informationActivity;
+    });
+
+    /// Sorting SelectedItemActivity
+    sortSelectedItemActivity();
     notifyListeners();
   }
 

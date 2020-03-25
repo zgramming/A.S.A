@@ -49,8 +49,21 @@ class _ActivityCalendarState extends State<ActivityCalendar> {
           events: mcProvider.activityBasedOnDate,
           onDaySelected: widget.onDaySelected,
           onDayLongPressed: (date, activity) {
-            DateTime dateRevision = DateTime(date.year, date.month, date.day);
-            mcProvider.setDateOnLongPressCalendar(dateRevision);
+            DateTime now = DateTime.now();
+            DateTime initialDateCupertino = DateTime(
+              date.year,
+              date.month,
+              date.day,
+              now.hour,
+              now.minute,
+              now.second,
+            );
+            DateTime minimumDateCupertino =
+                DateTime(date.year, date.month, date.day);
+            mcProvider.setDateOnLongPressCalendar(
+              initialDateCupertino: initialDateCupertino,
+              minDateCupertino: minimumDateCupertino,
+            );
             Navigator.of(context).pushNamed(AddActivityScreen.routeName);
           },
           builders: CalendarBuilders(
