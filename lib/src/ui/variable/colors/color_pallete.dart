@@ -23,14 +23,16 @@ class ColorPallete {
   /// Scaffold Dark Color
   Color scaffoldDarkColor = Color(0xFF003545);
 
-  /// Scaffold Color
-  Color scaffoldDynamicColor(BuildContext context) =>
-      (getAppTheme(context) == Brightness.dark)
-          ? scaffoldDarkColor
-          : scaffoldColor;
-  //DarkMode Color
   // Color darkModeColor = Color(0xff121212);
   Color accentDarkModeColor = Color(0xFFf638dc);
+
+  /// Dynamic Outline TextFormField Color
+  Color focusTextFormFieldTextDynamicColor(BuildContext context) =>
+      (getAppTheme(context) == Brightness.dark ? white : black.withOpacity(.6));
+
+  /// Dynamic Outline TextFormField Color
+  Color borderOutlineTextFormFieldDynamicColor(BuildContext context) =>
+      (getAppTheme(context) == Brightness.dark ? white : accentColor);
 
   /// Default Dynamic Text Color DarkMode
   Color defaultTextDynamicColor(BuildContext context) =>
@@ -40,7 +42,7 @@ class ColorPallete {
   Color cardDynamicColor(BuildContext context) =>
       (getAppTheme(context) == Brightness.dark)
           ? Theme.of(context).primaryColor
-          : Colors.white;
+          : white;
 
   /// BottomTitleMainCalendarDynamicColor Dynamic Color For DarkMode
   Color bottomTitleMainCalendarDynamicColor(BuildContext context) =>
@@ -76,7 +78,7 @@ class ColorPallete {
     bool isDeleteIcon = false,
   }) =>
       (getAppTheme(context) == Brightness.dark)
-          ? Colors.white
+          ? white
           : isDeleteIcon ? Theme.of(context).errorColor : Colors.blue[800];
 }
 

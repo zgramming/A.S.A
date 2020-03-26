@@ -77,7 +77,7 @@ class _EditCategoryState extends State<EditCategory> {
                                   onSaved: (value) => titleForm = value,
                                   labelText: appConfig.titleCategoryText,
                                   hintText: appConfig.titleCategoryText,
-                                  prefixIcon: Icon(Icons.title),
+                                  prefixIcon: Icons.title,
                                   textInputAction: TextInputAction.done,
                                   onFieldSubmitted: (value) => _validate(
                                     ctgProvider: ctgProvider,
@@ -90,7 +90,7 @@ class _EditCategoryState extends State<EditCategory> {
                                   onSaved: (value) => informationForm = value,
                                   labelText: appConfig.informationCategoryText,
                                   hintText: appConfig.informationCategoryText,
-                                  prefixIcon: Icon(Icons.info),
+                                  prefixIcon: Icons.info,
                                   textInputAction: TextInputAction.newline,
                                   keyboardType: TextInputType.multiline,
                                   minLines: 3,

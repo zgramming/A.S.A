@@ -1,10 +1,11 @@
+import 'package:atur_semua_aktifitas/src/ui/variable/colors/color_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/global_provider.dart';
 
 class TextFormFieldCustom extends StatelessWidget {
-  final Widget prefixIcon;
+  final IconData prefixIcon;
   final Widget suffixIcon;
   final String hintText;
   final String labelText;
@@ -22,7 +23,7 @@ class TextFormFieldCustom extends StatelessWidget {
   final Function(String) onFieldSubmitted;
   final Function(String) onSaved;
   TextFormFieldCustom({
-    this.prefixIcon = const Icon(Icons.supervised_user_circle),
+    this.prefixIcon = Icons.supervised_user_circle,
     this.suffixIcon,
     this.initialValue,
     this.minLines,
@@ -52,7 +53,12 @@ class TextFormFieldCustom extends StatelessWidget {
       minLines: minLines,
       maxLines: isPassword ? 1 : maxLines,
       decoration: InputDecoration(
-        prefixIcon: isPassword ? Icon(Icons.lock) : prefixIcon,
+        prefixIcon: isPassword
+            ? Icon(Icons.lock)
+            : Icon(
+                prefixIcon,
+                color: colorPallete.focusTextFormFieldTextDynamicColor(context),
+              ),
         suffixIcon: isPassword
             ? IconButton(
                 icon: Icon(
@@ -60,8 +66,9 @@ class TextFormFieldCustom extends StatelessWidget {
                       ? Icons.visibility_off
                       : Icons.visibility,
                 ),
-                onPressed: () => globalProvider
-                    .setObsecurePassword(globalProvider.obsecurePassword),
+                onPressed: () => globalProvider.setObsecurePassword(
+                  globalProvider.obsecurePassword,
+                ),
               )
             : suffixIcon,
         hintText: hintText,
@@ -69,6 +76,14 @@ class TextFormFieldCustom extends StatelessWidget {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(radius)),
         contentPadding: const EdgeInsets.all(8.0),
         hintStyle: TextStyle(fontSize: 10),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: colorPallete.borderOutlineTextFormFieldDynamicColor(context),
+          ),
+        ),
+        labelStyle: TextStyle(
+          color: colorPallete.focusTextFormFieldTextDynamicColor(context),
+        ),
       ),
       textInputAction: isDone ? TextInputAction.done : textInputAction,
       keyboardType: keyboardType,
