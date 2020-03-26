@@ -17,6 +17,17 @@ class ColorPallete {
   ///Accent Color
   Color accentColor = Color(0xff4d089a);
 
+  /// Scaffold Color
+  Color scaffoldColor = Color(0xFFf1f3f4);
+
+  /// Scaffold Dark Color
+  Color scaffoldDarkColor = Color(0xFF003545);
+
+  /// Scaffold Color
+  Color scaffoldDynamicColor(BuildContext context) =>
+      (getAppTheme(context) == Brightness.dark)
+          ? scaffoldDarkColor
+          : scaffoldColor;
   //DarkMode Color
   // Color darkModeColor = Color(0xff121212);
   Color accentDarkModeColor = Color(0xFFf638dc);
