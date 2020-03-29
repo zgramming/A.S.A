@@ -6,18 +6,8 @@ A.S.A Aplikasi mengatur semua aktifitasmu menjadi lebih mudah
 SQFLite
 
 ### Screen Capture 
-<img src="https://i.stack.imgur.com/LZtwy.png" height="450">
+<p align=""center>
+  <img src="https://i.stack.imgur.com/9X1lI.png" width="600">
+  <img src="https://i.stack.imgur.com/xBxjh.png" width="600">
+</p>
 
-<img src="https://i.stack.imgur.com/4xJzA.png" height="450">
-
-<img src="https://i.stack.imgur.com/h9TRE.png" height="450">
-
-<img src="https://i.stack.imgur.com/P7MEN.png" height="450">
-
-<img src="https://i.stack.imgur.com/93RzG.png" height="450">
-
-<img src="https://i.stack.imgur.com/25Idg.png" height="450">
-
-<img src="https://i.stack.imgur.com/V5RUD.png" height="450">
-
-<img src="https://i.stack.imgur.com/NBVWn.png" height="450">
