@@ -27,7 +27,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
   String titleForm;
   String informationForm;
   String appBarTitle;
-
+  int codeIconActivity;
   ActivityModel editArgs;
   DateTime dateTimeActivityArgs;
 
@@ -52,6 +52,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
       titleForm = editArgs.titleActivity;
       informationForm = editArgs.informationActivity;
       dateTimeActivityArgs = DateTime.parse(editArgs.dateTimeActivity);
+      codeIconActivity = editArgs.codeIconActivity;
     }
   }
 
@@ -90,6 +91,9 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
             dateTimeActivity:
                 mcProvider.selectedDateFromCupertinoDatePicker.toString(),
             informationActivity: informationForm,
+            codeIconActivity: ctgProvider.selectedIconCodeCardCategory == 59566
+                ? codeIconActivity
+                : ctgProvider.selectedIconCodeCardCategory,
             idActivity: editArgs.idActivity,
           );
         }

@@ -120,6 +120,7 @@ class MainCalendarProvider extends ChangeNotifier {
     @required String titleActivity,
     @required String dateTimeActivity,
     @required String informationActivity,
+    @required int codeIconActivity,
     @required String idActivity,
   }) async {
     await db.updateActivity(
@@ -127,6 +128,7 @@ class MainCalendarProvider extends ChangeNotifier {
       dateTimeActivity: dateTimeActivity,
       informationActivity: informationActivity,
       idActivity: idActivity,
+      codeIconActivity: codeIconActivity,
     );
 
     /// Mencari SelectedActivity Item Berdasarkan IDnya, Ketika sudah ketemu update valuenya berdarkan property yang ada.
@@ -136,6 +138,7 @@ class MainCalendarProvider extends ChangeNotifier {
       value.titleActivity = titleActivity;
       value.dateTimeActivity = dateTimeActivity;
       value.informationActivity = informationActivity;
+      value.codeIconActivity = codeIconActivity;
     });
 
     /// Sorting SelectedItemActivity

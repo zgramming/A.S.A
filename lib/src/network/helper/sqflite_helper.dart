@@ -122,15 +122,21 @@ class DBHelper {
     @required String titleActivity,
     @required String dateTimeActivity,
     @required String informationActivity,
+    @required int codeIconActivity,
     @required String idActivity,
   }) async {
-    //TODO Belum Pakai Icon Updatenya
     final db = await database();
     final result = await db.rawUpdate('''
       UPDATE ${appConfig.tableActivity}
-      SET title_activity = ? , datetime_activity = ? , information_activity = ?
+      SET title_activity = ? , datetime_activity = ? , information_activity = ? , code_icon_activity = ?
       WHERE id_activity = ?
-      ''', [titleActivity, dateTimeActivity, informationActivity, idActivity]);
+      ''', [
+      titleActivity,
+      dateTimeActivity,
+      informationActivity,
+      codeIconActivity,
+      idActivity,
+    ]);
     print('Result update all value Activity =$result');
     return result;
   }
