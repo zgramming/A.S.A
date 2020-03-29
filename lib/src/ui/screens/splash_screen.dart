@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
+import './welcome_screen.dart';
+
 import '../template/splashscreen_template/splashscreen_template.dart';
 import '../template/splashscreen_template/widgets/splashscreen_image_asset.dart';
 import '../variable/config/app_config.dart';
-
-import 'welcome_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   static const routeNamed = '/splashscreen';

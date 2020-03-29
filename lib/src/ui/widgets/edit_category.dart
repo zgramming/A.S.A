@@ -1,15 +1,16 @@
-import 'package:atur_semua_aktifitas/src/ui/widgets/popUpDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 
-import '../../providers/category_provider.dart';
-
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
 import '../variable/sizes/sizes.dart';
+
 import '../widgets/button_custom.dart';
 import '../widgets/textformfield_custom.dart';
+
+import '../../providers/category_provider.dart';
+import '../../ui/widgets/popUpDialog.dart';
 
 class EditCategory extends StatefulWidget {
   @override
@@ -60,8 +61,8 @@ class _EditCategoryState extends State<EditCategory> {
                             onTapIcon: () =>
                                 _pickIcon(ctgProvider, result.idCategory),
                             onTapEdit: () => ctgProvider.setShowEditCategory(
-                              ctgProvider.showEditCategory,
-                              index,
+                              value: ctgProvider.showEditCategory,
+                              index: index,
                             ),
                             onTapDelete: () => showDialog(
                               context: context,

@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/main_calendar_provider.dart';
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
 import '../variable/sizes/sizes.dart';
 import '../widgets/calendar/activity_calendar.dart';
 import '../widgets/calendar/activity_calendar_list.dart';
+
+import '../../providers/main_calendar_provider.dart';
 
 class MainCalendarScreen extends StatelessWidget {
   @override
@@ -25,10 +26,16 @@ class MainCalendarScreen extends StatelessWidget {
               builder: (_, mcProvider, __) => ActivityCalendar(
                 onDaySelected: (date, activity) {
                   if (activity.isEmpty || activity == null) {
-                    mcProvider.setSelectedListAndDateActivity([], date);
+                    mcProvider.setSelectedListAndDateActivity(
+                      selectedActivity: [],
+                      dateSelectedActivityItem: date,
+                    );
                     return null;
                   }
-                  mcProvider.setSelectedListAndDateActivity(activity, date);
+                  mcProvider.setSelectedListAndDateActivity(
+                    dateSelectedActivityItem: date,
+                    selectedActivity: activity,
+                  );
                 },
               ),
             ),

@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/appbar_custom.dart';
+
 import '../../providers/main_calendar_provider.dart';
 import '../../providers/global_provider.dart';
 import '../../function/double_tap_to_exit.dart';
-
-import '../widgets/appbar_custom.dart';
-
 // import '../screens/add_activity_screen.dart';
 // import '../screens/main_calendar_screen.dart';
 // import '../screens/nearby_activity_screen.dart';

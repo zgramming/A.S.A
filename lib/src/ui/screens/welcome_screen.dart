@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import '../template/splashscreen_template/widgets/splashscreen_image_asset.dart';
-import '../variable/config/app_config.dart';
-import '../widgets/bottomnavigationbar_custom.dart';
+
 import './settings_screen.dart';
 import './main_calendar_screen.dart';
 import './nearby_activity_screen.dart';
+
+import '../template/splashscreen_template/widgets/splashscreen_image_asset.dart';
+import '../variable/config/app_config.dart';
+import '../widgets/bottomnavigationbar_custom.dart';
 
 class WelcomeScreen extends StatelessWidget {
   static const routeName = '/welcome-screen';

@@ -10,13 +10,13 @@ class AppThemeProvider extends ChangeNotifier {
   bool _isDarkMode = false;
   bool get isDarkMode => _isDarkMode;
 
-  setAppTheme(bool value) {
+  void setAppTheme(bool value) {
     _isDarkMode = value;
     _saveAppThemeToSharedPreferences(_isDarkMode);
     notifyListeners();
   }
 
-  _saveAppThemeToSharedPreferences(bool spValue) async {
+  void _saveAppThemeToSharedPreferences(bool spValue) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.setBool(_APP_THEME, spValue);
     notifyListeners();

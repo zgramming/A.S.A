@@ -1,8 +1,8 @@
-import 'package:atur_semua_aktifitas/src/ui/variable/colors/color_pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/global_provider.dart';
+import '../../ui/variable/colors/color_pallete.dart';
 
 class TextFormFieldCustom extends StatelessWidget {
   final IconData prefixIcon;

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/category_provider.dart';
 import '../variable/colors/color_pallete.dart';
 import '../variable/sizes/sizes.dart';
 import '../widgets/empty_category.dart';
+
+import '../../providers/category_provider.dart';
 
 class FetchCardCategory extends StatefulWidget {
   @override
@@ -37,8 +38,8 @@ class _FetchCardCategoryState extends State<FetchCardCategory> {
                   child: InkWell(
                     onTap: () {
                       categoryProvider.setSelectedIndexAndIconCodeCardCategory(
-                        index,
-                        result.codeIconCategory,
+                        iconCodeCard: result.codeIconCategory,
+                        indexCard: index,
                       );
                     },
                     child: Padding(

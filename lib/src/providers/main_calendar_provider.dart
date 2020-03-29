@@ -3,7 +3,7 @@ import '../../src/network/helper/sqflite_helper.dart';
 import '../../src/network/models/activity/activity_model.dart';
 
 class MainCalendarProvider extends ChangeNotifier {
-  /// Melakukan Inisialisasi agar script dibawah ini langsung berjalan
+  /// Melakukan Inisialisasi agar script dibawah ini  agar langsung berjalan
 
   MainCalendarProvider() {
     getUnFinishedActivity();
@@ -11,6 +11,8 @@ class MainCalendarProvider extends ChangeNotifier {
     getActivityBasedOnDate();
     getAllActivity();
   }
+
+  ///* initialize DB SQFLite
   DBHelper db = DBHelper();
 
   DateTime _dateSelectedActivityItem = DateTime.now();
@@ -25,20 +27,40 @@ class MainCalendarProvider extends ChangeNotifier {
   List<ActivityModel> _selectedActivityItem = [];
   List<ActivityModel> _allActivityItem = [];
 
+  ///* Get Date From SelectedActivityItem in Flutter Calendar
+  ///* Date will change depending you tap date => 12 march , 14 march
   DateTime get dateSelectedActivityItem => _dateSelectedActivityItem;
+
+  ///* Get Date From CupertinoDatePicker on AddActivityScreen
   DateTime get selectedDateFromCupertinoDatePicker =>
       _selectedDateFromCupertinoDatePicker;
+
+  ///* Mininum Date CupertinoDatePicker
   DateTime get minDateCupertino => _minDateCupertino;
+
+  ///* initial Date CupertinoDatePicker
   DateTime get initialDateCupertino => _initialDateCupertino;
 
+  ///* all activity will collected depending on the Date
+  /// 12-20-1999:['Berkuda','Berenang','Bertemu Mantan']
   Map<DateTime, List<ActivityModel>> get activityBasedOnDate =>
       _activityBasedOnDate;
 
+  /// Get Top Ten Nearby Activity, it will start from DateTime.now() so on limited only 10 activity
+  /// Example => 29 Maret 2020 06.00,29 Maret 2020 08.30,29 Maret 2020 08.50 ,29 Maret 2020 16.00
   List<ActivityModel> get nearby10ActivityItem => [..._nearby10ActivityItem];
+
+  /// Get List Activity based on the Date
   List<ActivityModel> get selectedActivityItem => [..._selectedActivityItem];
+
+  /// Get Unfinished Activity
   List<ActivityModel> get unFinishedActivity => [..._unFinishedActivityItem];
+
+  /// Get All Activity (Unfinished and finished Activity)
   List<ActivityModel> get allActivity => [..._allActivityItem];
 
+  /// This function for Give Value to initialDate and MinumumDate CUPERTINO DATEPICKER
+  /// this function is used on the page [ActivityCalendar & OperationCalendarList]
   void setDateCupertinoDatePicker({
     DateTime initialDateCupertino,
     DateTime minDateCupertino,
@@ -51,22 +73,28 @@ class MainCalendarProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSelectedListAndDateActivity(
-      List<ActivityModel> selectedActivity, DateTime dateSelectedActivityItem) {
+  /// This Function for collect list and date activity to selectedActivity and dateselectedactivityitem variable
+  void setSelectedListAndDateActivity({
+    List<ActivityModel> selectedActivity,
+    DateTime dateSelectedActivityItem,
+  }) {
     _selectedActivityItem = selectedActivity;
     _dateSelectedActivityItem = dateSelectedActivityItem;
     notifyListeners();
   }
 
+  /// Save Date From CupertinoDatePicker where user choose date & time
   void setSelectedDateFromCupertinoDatePicker(DateTime selectedDate) {
     _selectedDateFromCupertinoDatePicker = selectedDate;
     notifyListeners();
   }
 
+  /// Reset value from CupertinoDatePicker
   void resetSelectedDateFromCupertinoDatePicker() {
     _selectedDateFromCupertinoDatePicker = null;
   }
 
+  /// Sorting selected activity based on date and status activity (From 0 => 24 And Unfinished => finished Activity). ASCENDING
   void sortSelectedItemActivity() {
     _selectedActivityItem
         .sort((a, b) => a.dateTimeActivity.compareTo(b.dateTimeActivity));
@@ -74,6 +102,7 @@ class MainCalendarProvider extends ChangeNotifier {
         .sort((a, b) => a.isDoneActivity.compareTo(b.isDoneActivity));
   }
 
+  /// Addung Activity Function
   Future<void> addingActivity({
     @required String idActivity,
     @required String titleActivity,
@@ -249,12 +278,19 @@ class MainCalendarProvider extends ChangeNotifier {
   ///Mendapatkan Object<10-10-1999,['Berlatih Berkuda','Bermain piano','Bergulat']> berdasarkan tanggalnya.
   Future<Map<DateTime, List<ActivityModel>>> getActivityBasedOnDate() async {
     try {
+      /// Initialize Empty Map
       Map<DateTime, List<ActivityModel>> mapFetch = {};
+
+      /// Get All Activity
       List<ActivityModel> resultActivityList = await db.fetchAllActivity();
 
+      /// Looping Based On List Activity Length
       for (int i = 0; i < resultActivityList.length; i++) {
+        ///Convert Date From String To DateTime, Because SQFLite not supported DATETIME Type
         DateTime convertDateActivityFromStringToDateTime =
             DateTime.parse(resultActivityList[i].dateTimeActivity);
+
+        /// initialize Date
         final dateActivity = DateTime(
           convertDateActivityFromStringToDateTime.year,
           convertDateActivityFromStringToDateTime.month,

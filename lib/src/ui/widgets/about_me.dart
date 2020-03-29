@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../function/open_social_media.dart';
-import '../../network/models/profil/profil_model.dart';
+
 import '../variable/colors/color_pallete.dart';
 import '../variable/sizes/sizes.dart';
+
+import '../../function/open_social_media.dart';
+import '../../network/models/profil/profil_model.dart';
 
 class AboutMe extends StatelessWidget {
   @override

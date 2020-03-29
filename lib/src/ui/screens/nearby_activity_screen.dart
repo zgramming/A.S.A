@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/main_calendar_provider.dart';
 import '../widgets/empty_nearby_activity.dart';
 import '../widgets/nearby_activity_list.dart';
+
+import '../../providers/main_calendar_provider.dart';
 
 class NearbyActivity extends StatelessWidget {
   final DateTime test = DateTime.now();

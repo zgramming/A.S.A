@@ -7,16 +7,15 @@ class GlobalProvider extends ChangeNotifier {
     _getVersion();
   }
 
-  //! For BottomNavigationBarCustom On Tap
-
+  /// Initial Screen to show up after splashscreen
   int _currentIndexBottomNavigation = 1;
-
-  /// Untuk Mengatur Halaman Yang Pertama Kali Akan Tampil Setelah Login
   int get currentIndexBottomNavigation => _currentIndexBottomNavigation;
 
+  /// Give initial Text To AppBar
   Widget _currentAppBarBottomNavigation = Text("Kalendar Aktifitas");
   Widget get currentAppBarBottomNavigation => _currentAppBarBottomNavigation;
 
+  /// To Change Screen From BottomNavigationBar
   int setCurrentIndexBottomNavigation(int index) {
     int result = index;
     _currentIndexBottomNavigation = result;
@@ -24,6 +23,7 @@ class GlobalProvider extends ChangeNotifier {
     return result;
   }
 
+  /// To Change Title Appbar On Change Screen, it will make titleAppbar Dynamic depending on screen Name
   Widget setCurrentAppBarBottomNavigation(Widget appbarBottomNavigation) {
     Widget result = appbarBottomNavigation;
     _currentAppBarBottomNavigation = result;

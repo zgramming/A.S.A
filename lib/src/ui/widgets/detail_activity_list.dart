@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../network/models/activity/activity_model.dart';
+import './button_custom.dart';
 
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
 import '../variable/sizes/sizes.dart';
 
-import 'button_custom.dart';
+import '../../network/models/activity/activity_model.dart';
 
 class DetailActivityList extends StatelessWidget {
   final ActivityModel result;

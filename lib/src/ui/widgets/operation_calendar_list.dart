@@ -1,16 +1,17 @@
-import 'package:atur_semua_aktifitas/src/providers/main_calendar_provider.dart';
-import 'package:atur_semua_aktifitas/src/ui/screens/add_activity_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import './delete_activity_list.dart';
 import './detail_activity_list.dart';
 
-import '../../network/models/activity/activity_model.dart';
-
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
 import '../variable/sizes/sizes.dart';
+import '../widgets/popUpDialog.dart';
+
+import '../../providers/main_calendar_provider.dart';
+import '../../ui/screens/add_activity_screen.dart';
+import '../../network/models/activity/activity_model.dart';
 
 class OperationCalendarList extends StatelessWidget {
   final ActivityModel activityModel;
@@ -43,22 +44,35 @@ class OperationCalendarList extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  circleOperationCalendarList(
-                    context: context,
-                    colorCircle: Theme.of(context).errorColor,
-                    icon: Icons.delete,
-                    title: appConfig.hapus,
-                    onTap: () {
-                      Navigator.of(context).pop(true);
-                      showDialog(
+                  Consumer<MainCalendarProvider>(
+                    builder: (_, mcProvider, __) => circleOperationCalendarList(
                         context: context,
-                        builder: (ctxDialog) => DeleteActivityList(
-                          activityModel: activityModel,
+                        colorCircle: Theme.of(context).errorColor,
+                        icon: Icons.delete,
+                        title: appConfig.hapus,
+                        onTap: () => showDialog(
+                              context: context,
+                              child: PopUpDialog(
+                                title:
+                                    'Kamu Yakin Ingin Menghapus Aktifitas ini ?',
+                                onTap: () => mcProvider.deleteActivityById(
+                                  activityModel.idActivity,
+                                ),
+                              ),
+                            )
+                        // onTap: () {
+                        //   Navigator.of(context).pop(true);
+                        //   showDialog(
+                        //     context: context,
+                        //     builder: (ctxDialog) => DeleteActivityList(
+                        //       activityModel: activityModel,
+                        //     ),
+                        //   );
+                        // },
                         ),
-                      );
-                    },
                   ),
                   SizedBox(width: 15),
+                  //TODO Check Disnii ada bug apa tidak saat hapus aktifitas
                   Consumer<MainCalendarProvider>(
                     builder: (_, mcProvider, __) => circleOperationCalendarList(
                       context: context,

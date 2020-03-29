@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 
 import '../variable/colors/color_pallete.dart';
 import '../variable/config/app_config.dart';
 import '../variable/sizes/sizes.dart';
+
 import '../widgets/button_custom.dart';
 import '../widgets/textformfield_custom.dart';
+
 import '../../providers/category_provider.dart';
 
 class AddCategory extends StatefulWidget {
@@ -19,7 +21,7 @@ class _AddCategoryState extends State<AddCategory> {
   String titleForm;
   String informationForm;
 
-  void _validate(CategoryProvider ctgProvider) async {
+  void _validate({CategoryProvider ctgProvider}) async {
     final dateNow = DateTime.now();
     final form = _formKey.currentState;
     if (form.validate()) {
@@ -97,7 +99,9 @@ class _AddCategoryState extends State<AddCategory> {
                 hintText: appConfig.titleCategoryText,
                 prefixIcon: Icons.title,
                 textInputAction: TextInputAction.done,
-                onFieldSubmitted: (value) => _validate(categoryProvider),
+                onFieldSubmitted: (value) => _validate(
+                  ctgProvider: categoryProvider,
+                ),
               ),
               SizedBox(height: 15),
               TextFormFieldCustom(
@@ -114,7 +118,9 @@ class _AddCategoryState extends State<AddCategory> {
               ButtonCustom(
                 onPressed: (categoryProvider.iconCodeFromIconPicker == 0)
                     ? null
-                    : () => _validate(categoryProvider),
+                    : () => _validate(
+                          ctgProvider: categoryProvider,
+                        ),
                 buttonColor: Theme.of(context).accentColor,
               )
             ],

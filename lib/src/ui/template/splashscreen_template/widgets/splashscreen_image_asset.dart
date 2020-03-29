@@ -5,7 +5,10 @@ class SplashScreenImageAsset extends StatelessWidget {
   final String locationImage;
   final double imageHeight;
 
-  SplashScreenImageAsset({@required this.locationImage, this.imageHeight = 8});
+  SplashScreenImageAsset({
+    @required this.locationImage,
+    this.imageHeight = 8,
+  });
   @override
   Widget build(BuildContext context) {
     return Image.asset(
