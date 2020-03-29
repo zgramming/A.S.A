@@ -13,4 +13,7 @@ SQFLite
 <br><br>
 <p>
   <img src="https://i.stack.imgur.com/64DV6.png" width="20%">
+  <img src="https://i.stack.imgur.com/fpkAO.png" width="20%">
+  <img src="https://i.stack.imgur.com/EPEac.png" width="20%">
+  <img src="https://i.stack.imgur.com/UY6r9.png" width="20%">
 </p>
