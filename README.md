@@ -12,5 +12,5 @@ SQFLite
 </p>
 <br><br>
 <p>
-  <img src="https://i.stack.imgur.com/64DV6.png" width="20%" height="20%">
+  <img src="https://i.stack.imgur.com/64DV6.png" width="20%">
 </p>
