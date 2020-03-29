@@ -1,3 +1,4 @@
+import 'package:atur_semua_aktifitas/src/ui/widgets/popUpDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
@@ -37,86 +38,96 @@ class _EditCategoryState extends State<EditCategory> {
               onPressed: () => Navigator.of(context).pop(true),
             ),
             SizedBox(height: 15),
-            Consumer<CategoryProvider>(
-              builder: (_, ctgProvider, __) => ListView.separated(
-                separatorBuilder: (ctxSeparated, index) => Divider(
-                  color: colorPallete.dividerDynamicColor(ctxSeparated),
-                ),
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: ctgProvider.allCategoryItem.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final result = ctgProvider.allCategoryItem[index];
-                  return Column(
-                    children: <Widget>[
-                      Card(
-                        child: listTileEditCategory(
-                          title: result.titleCategory,
-                          subtitle: result.informationCategory,
-                          context: context,
-                          codeIcon: result.codeIconCategory,
-                          onTapIcon: () =>
-                              _pickIcon(ctgProvider, result.idCategory),
-                          onTapEdit: () => ctgProvider.setShowEditCategory(
-                            ctgProvider.showEditCategory,
-                            index,
-                          ),
-                          onTapDelete: () => ctgProvider.deleteCategory(
-                            idCategory: result.idCategory,
-                          ),
-                        ),
-                      ),
-                      Visibility(
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Form(
-                            key: _formKey,
-                            child: Column(
-                              children: <Widget>[
-                                TextFormFieldCustom(
-                                  onSaved: (value) => titleForm = value,
-                                  labelText: appConfig.titleCategoryText,
-                                  hintText: appConfig.titleCategoryText,
-                                  prefixIcon: Icons.title,
-                                  textInputAction: TextInputAction.done,
-                                  onFieldSubmitted: (value) => _validate(
-                                    ctgProvider: ctgProvider,
-                                    idCategory: result.idCategory,
-                                  ),
-                                  initialValue: result.titleCategory,
+            SizedBox(
+              height: sizes.height(context) * .65,
+              child: Consumer<CategoryProvider>(
+                builder: (_, ctgProvider, __) => ListView.separated(
+                  separatorBuilder: (ctxSeparated, index) => Divider(
+                    color: colorPallete.dividerDynamicColor(ctxSeparated),
+                  ),
+                  shrinkWrap: true,
+                  itemCount: ctgProvider.allCategoryItem.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final result = ctgProvider.allCategoryItem[index];
+                    return Column(
+                      children: <Widget>[
+                        Card(
+                          child: listTileEditCategory(
+                            title: result.titleCategory,
+                            subtitle: result.informationCategory,
+                            context: context,
+                            codeIcon: result.codeIconCategory,
+                            onTapIcon: () =>
+                                _pickIcon(ctgProvider, result.idCategory),
+                            onTapEdit: () => ctgProvider.setShowEditCategory(
+                              ctgProvider.showEditCategory,
+                              index,
+                            ),
+                            onTapDelete: () => showDialog(
+                              context: context,
+                              child: PopUpDialog(
+                                title:
+                                    'Kamu Yakin Ingin Menghapus Kategori ini ? ',
+                                onTap: () => ctgProvider.deleteCategory(
+                                  idCategory: result.idCategory,
                                 ),
-                                SizedBox(height: 10),
-                                TextFormFieldCustom(
-                                  onSaved: (value) => informationForm = value,
-                                  labelText: appConfig.informationCategoryText,
-                                  hintText: appConfig.informationCategoryText,
-                                  prefixIcon: Icons.info,
-                                  textInputAction: TextInputAction.newline,
-                                  keyboardType: TextInputType.multiline,
-                                  minLines: 3,
-                                  isValidatorEnable: false,
-                                  initialValue: result.informationCategory,
-                                ),
-                                SizedBox(height: 10),
-                                ButtonCustom(
-                                  onPressed: () => _validate(
-                                    ctgProvider: ctgProvider,
-                                    idCategory: result.idCategory,
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                              ],
+                              ),
                             ),
                           ),
                         ),
-                        visible: (ctgProvider.showEditCategory &&
-                                ctgProvider.indexEditCategory == index)
-                            ? true
-                            : false,
-                      ),
-                    ],
-                  );
-                },
+                        Visibility(
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                children: <Widget>[
+                                  TextFormFieldCustom(
+                                    onSaved: (value) => titleForm = value,
+                                    labelText: appConfig.titleCategoryText,
+                                    hintText: appConfig.titleCategoryText,
+                                    prefixIcon: Icons.title,
+                                    textInputAction: TextInputAction.done,
+                                    onFieldSubmitted: (value) => _validate(
+                                      ctgProvider: ctgProvider,
+                                      idCategory: result.idCategory,
+                                    ),
+                                    initialValue: result.titleCategory,
+                                  ),
+                                  SizedBox(height: 10),
+                                  TextFormFieldCustom(
+                                    onSaved: (value) => informationForm = value,
+                                    labelText:
+                                        appConfig.informationCategoryText,
+                                    hintText: appConfig.informationCategoryText,
+                                    prefixIcon: Icons.info,
+                                    textInputAction: TextInputAction.newline,
+                                    keyboardType: TextInputType.multiline,
+                                    minLines: 3,
+                                    isValidatorEnable: false,
+                                    initialValue: result.informationCategory,
+                                  ),
+                                  SizedBox(height: 10),
+                                  ButtonCustom(
+                                    onPressed: () => _validate(
+                                      ctgProvider: ctgProvider,
+                                      idCategory: result.idCategory,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                ],
+                              ),
+                            ),
+                          ),
+                          visible: (ctgProvider.showEditCategory &&
+                                  ctgProvider.indexEditCategory == index)
+                              ? true
+                              : false,
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ],

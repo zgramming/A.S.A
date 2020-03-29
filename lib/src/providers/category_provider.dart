@@ -30,32 +30,6 @@ class CategoryProvider extends ChangeNotifier {
   int get iconCodeFromIconPicker => _iconCodeFromIconPicker;
   List<CategoryModel> get allCategoryItem => [..._allCategoryItem];
 
-  setShowEditCategory(bool value, int index) {
-    _showEditCategory = !value;
-    _indexEditCategory = index;
-    notifyListeners();
-  }
-
-  setCodeIconFromIconPicker(int codeIconPicker) {
-    _iconCodeFromIconPicker = codeIconPicker;
-    notifyListeners();
-  }
-
-  setSelectedIndexAndIconCodeCardCategory(
-    int indexCard,
-    int iconCodeCard,
-  ) {
-    _selectedIconCodeCardCategory = iconCodeCard;
-    _selectedIndexCardCategory = indexCard;
-    notifyListeners();
-  }
-
-  resetSelectedIndexAndIconCodeCardCategory() {
-    _selectedIconCodeCardCategory = 59566;
-    _selectedIndexCardCategory = -1;
-    notifyListeners();
-  }
-
   Future<void> addingCategory({
     @required String idCategory,
     @required String titleCategory,
@@ -75,6 +49,8 @@ class CategoryProvider extends ChangeNotifier {
 
     /// Sort By Descending
     _allCategoryItem.sort((a, b) => b.createdDate.compareTo(a.createdDate));
+
+    resetCodeIconFromIconPicker();
     notifyListeners();
   }
 
@@ -108,6 +84,7 @@ class CategoryProvider extends ChangeNotifier {
       element.titleCategory = titleCategory;
       element.informationCategory = informationCategory;
     });
+    resetShowEditCategory();
     notifyListeners();
   }
 
@@ -115,5 +92,40 @@ class CategoryProvider extends ChangeNotifier {
     final getAllCategoryFromSqflite = await db.fetchCategory();
     _allCategoryItem = getAllCategoryFromSqflite;
     notifyListeners();
+  }
+
+  void setShowEditCategory(bool value, int index) {
+    _showEditCategory = !value;
+    _indexEditCategory = index;
+    notifyListeners();
+  }
+
+  void setCodeIconFromIconPicker(int codeIconPicker) {
+    _iconCodeFromIconPicker = codeIconPicker;
+    notifyListeners();
+  }
+
+  void setSelectedIndexAndIconCodeCardCategory(
+    int indexCard,
+    int iconCodeCard,
+  ) {
+    _selectedIconCodeCardCategory = iconCodeCard;
+    _selectedIndexCardCategory = indexCard;
+    notifyListeners();
+  }
+
+  void resetSelectedIndexAndIconCodeCardCategory() {
+    _selectedIconCodeCardCategory = 59566;
+    _selectedIndexCardCategory = -1;
+    notifyListeners();
+  }
+
+  void resetCodeIconFromIconPicker() {
+    _iconCodeFromIconPicker = 0;
+  }
+
+  void resetShowEditCategory() {
+    _showEditCategory = false;
+    _indexEditCategory = -1;
   }
 }
