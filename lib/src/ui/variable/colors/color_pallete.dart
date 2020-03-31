@@ -15,7 +15,7 @@ class ColorPallete {
   Color primaryColor = Color(0xff00adb5);
 
   ///Accent Color
-  Color accentColor = Color(0xff4d089a);
+  Color accentColor = Color(0xff823d7d);
 
   /// Scaffold Color
   Color scaffoldColor = Color(0xFFf1f3f4);

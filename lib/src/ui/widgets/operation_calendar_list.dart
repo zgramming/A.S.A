@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './delete_activity_list.dart';
 import './detail_activity_list.dart';
 
 import '../variable/colors/color_pallete.dart';
@@ -55,9 +54,18 @@ class OperationCalendarList extends StatelessWidget {
                               child: PopUpDialog(
                                 title:
                                     'Kamu Yakin Ingin Menghapus Aktifitas ini ?',
-                                onTap: () => mcProvider.deleteActivityById(
-                                  activityModel.idActivity,
-                                ),
+                                onTap: () {
+                                  int count = 0;
+                                  mcProvider.deleteActivityById(
+                                    activityModel.idActivity,
+                                  );
+
+                                  /// Akan Melakukan Pop Sampai 2 Kali [Menutup Dialog dan ShowBottomSheet]
+                                  Navigator.popUntil(
+                                    context,
+                                    (route) => count++ == 2,
+                                  );
+                                },
                               ),
                             )
                         // onTap: () {
