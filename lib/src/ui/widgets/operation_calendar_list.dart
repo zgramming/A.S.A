@@ -67,17 +67,7 @@ class OperationCalendarList extends StatelessWidget {
                                   );
                                 },
                               ),
-                            )
-                        // onTap: () {
-                        //   Navigator.of(context).pop(true);
-                        //   showDialog(
-                        //     context: context,
-                        //     builder: (ctxDialog) => DeleteActivityList(
-                        //       activityModel: activityModel,
-                        //     ),
-                        //   );
-                        // },
-                        ),
+                            )),
                   ),
                   SizedBox(width: 15),
                   //TODO Check Disnii ada bug apa tidak saat hapus aktifitas
