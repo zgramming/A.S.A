@@ -39,8 +39,7 @@ class ActivityCalendarList extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
                 final result = selectedActivity[index];
-                bool convertIntToBool =
-                    result.isDoneActivity == 0 ? false : true;
+                bool isDone = result.isDoneActivity == 0 ? false : true;
                 DateTime convertDateActivityFromStringToDateTime =
                     DateTime.parse(result.dateTimeActivity);
                 String formatTime = DateFormat.Hm()
@@ -49,9 +48,7 @@ class ActivityCalendarList extends StatelessWidget {
                   shape: Border(
                     right: BorderSide(
                       width: 5,
-                      color: result.isDoneActivity == 0
-                          ? Colors.yellow[700]
-                          : Colors.green,
+                      color: isDone ? Colors.green : Colors.yellow[700],
                     ),
                   ),
                   child: InkWell(
@@ -90,6 +87,9 @@ class ActivityCalendarList extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 16,
+                          decoration: isDone
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
                         ),
                       ),
                       subtitle: SizedBox(
@@ -109,7 +109,7 @@ class ActivityCalendarList extends StatelessWidget {
                       ),
                       trailing: Consumer<MainCalendarProvider>(
                         builder: (_, mcProvider, __) => Checkbox(
-                          value: convertIntToBool,
+                          value: isDone,
                           onChanged: result.isDoneActivity == 1
                               ? null
                               : (value) => mcProvider.updateStatusOnTapCheckBox(
