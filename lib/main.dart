@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
 import './src/providers/category_provider.dart';
@@ -9,7 +10,11 @@ import './src/providers/main_calendar_provider.dart';
 
 import 'src/app.dart';
 
-void main() async {
+NotificationAppLaunchDetails notificationAppLaunchDetails;
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
