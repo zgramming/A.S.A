@@ -69,9 +69,22 @@ class _EditCategoryState extends State<EditCategory> {
                               child: PopUpDialog(
                                 title:
                                     'Kamu Yakin Ingin Menghapus Kategori ini ? ',
-                                onTap: () => ctgProvider.deleteCategory(
-                                  idCategory: result.idCategory,
-                                ),
+                                onTap: () {
+                                  int countPop = 0;
+
+                                  ctgProvider
+                                      .deleteCategory(
+                                    idCategory: result.idCategory,
+                                  )
+                                      .then(
+                                    (_) {
+                                      ctgProvider.allCategoryItem.length == 0
+                                          ? Navigator.of(context).popUntil(
+                                              (route) => countPop++ == 2)
+                                          : Navigator.of(context).pop();
+                                    },
+                                  );
+                                },
                               ),
                             ),
                           ),
