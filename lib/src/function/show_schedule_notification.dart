@@ -1,5 +1,7 @@
+import 'package:atur_semua_aktifitas/src/ui/variable/colors/color_pallete.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter/material.dart';
 
 class ShowNotificationSchedule {
   FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
@@ -20,8 +22,9 @@ class ShowNotificationSchedule {
       idNotification.toString(),
       titleNotification,
       bodyNotification,
-      priority: Priority.High,
+      priority: Priority.Max,
       importance: Importance.Max,
+      color: colorPallete.primaryColor,
     );
 
     IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
@@ -77,7 +80,7 @@ class ShowNotificationSchedule {
         CupertinoDialogAction(
           child: Text('ok'),
           isDefaultAction: true,
-          onPressed: () => print('dialog cupertino'),
+          onPressed: () => print('dialog cupertino || $payload'),
         )
       ],
     );
