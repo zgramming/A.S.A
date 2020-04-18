@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../network/models/activity/activity_model.dart';
 import '../../../providers/main_calendar_provider.dart';
+import '../../../function/show_schedule_notification.dart';
 
 import '../../template/splashscreen_template/widgets/splashscreen_image_asset.dart';
 import '../../variable/colors/color_pallete.dart';
@@ -15,6 +16,9 @@ import '../operation_calendar_list.dart';
 class ActivityCalendarList extends StatelessWidget {
   final List<ActivityModel> selectedActivity;
   final DateTime dateActivity;
+
+  final ShowNotificationSchedule notificationSchedule =
+      ShowNotificationSchedule();
   ActivityCalendarList({
     @required this.selectedActivity,
     @required this.dateActivity,
@@ -112,9 +116,16 @@ class ActivityCalendarList extends StatelessWidget {
                           value: isDone,
                           onChanged: result.isDoneActivity == 1
                               ? null
-                              : (value) => mcProvider.updateStatusOnTapCheckBox(
+                              : (value) => mcProvider
+                                  .updateStatusOnTapCheckBox(
                                     result.idActivity,
                                     value,
+                                  )
+                                  .then(
+                                    (_) => notificationSchedule
+                                        .cancelNotificationById(
+                                      result.idActivity,
+                                    ),
                                   ),
                         ),
                       ),
