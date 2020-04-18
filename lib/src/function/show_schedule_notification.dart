@@ -19,15 +19,22 @@ class ShowNotificationSchedule {
   }) async {
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
-      idNotification.toString(),
-      titleNotification,
-      bodyNotification,
+      idNotification.toString(), titleNotification, bodyNotification,
       priority: Priority.High,
       importance: Importance.Max,
       color: colorPallete.primaryColor,
 
+      ///! Berfungsi untuk mengatur suara notifikasi
+      sound: RawResourceAndroidNotificationSound('slow_spring_board'),
+
       ///! Berfungsi agar saat body text terlalu panjang, memunculkan expanded icon.
       styleInformation: BigTextStyleInformation(''),
+
+      ///! Configurasi LED
+      enableLights: true,
+      ledColor: const Color.fromARGB(255, 255, 0, 0),
+      ledOnMs: 1000,
+      ledOffMs: 500,
     );
 
     IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
