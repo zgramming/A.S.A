@@ -7,6 +7,7 @@ import '../widgets/appbar_custom.dart';
 import '../../providers/main_calendar_provider.dart';
 import '../../providers/global_provider.dart';
 import '../../function/double_tap_to_exit.dart';
+import 'dart:async';
 // import '../screens/add_activity_screen.dart';
 // import '../screens/main_calendar_screen.dart';
 // import '../screens/nearby_activity_screen.dart';
@@ -41,6 +42,24 @@ class BottomNavigationBarCustom extends StatefulWidget {
 
 class _BottomNavigationBarCustomState extends State<BottomNavigationBarCustom> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  Timer timerCheckActivityPassed;
+
+  @override
+  void initState() {
+    super.initState();
+    final mcProvider =
+        Provider.of<MainCalendarProvider>(context, listen: false);
+    timerCheckActivityPassed = Timer.periodic(Duration(minutes: 1), (timer) {
+      print("Jalankan Perintah Setiap 1 Menit");
+      mcProvider.updateStatusWhenDatePassed();
+    });
+  }
+
+  @override
+  void dispose() {
+    timerCheckActivityPassed.cancel();
+    super.dispose();
+  }
 
   final List<BottomNavigationBarItem> items = [
     BottomNavigationBarItem(
