@@ -93,7 +93,6 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
             informationActivity: informationForm,
             createdDateActivity: dateNow.toString(),
           );
-
           await showNotificationSchedule.showNotificationSchedule(
             dateTimeShowNotification:
                 mcProvider.selectedDateFromCupertinoDatePicker,
