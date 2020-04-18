@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
+import './src/app.dart';
+import './src/providers/global_provider.dart';
 import './src/providers/category_provider.dart';
 import './src/providers/app_theme_provider.dart';
-import './src/providers/global_provider.dart';
 import './src/providers/main_calendar_provider.dart';
+import './src/function/show_schedule_notification.dart';
 
-import 'src/app.dart';
-
-NotificationAppLaunchDetails notificationAppLaunchDetails;
-FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+ShowNotificationSchedule notificationSchedule;
 
 Future<void> main() async {
+  ///! Digunakan Sekali saja untuk inialisasi FLutter Local Notification , Refer From Documentation
+  WidgetsFlutterBinding.ensureInitialized();
+  notificationSchedule = ShowNotificationSchedule();
+  notificationSchedule.initLocalNotification();
   runApp(
     MultiProvider(
       providers: [
