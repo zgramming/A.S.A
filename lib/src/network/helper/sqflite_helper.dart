@@ -19,7 +19,7 @@ class DBHelper {
   void _onCreate(sql.Database db, int version) async {
     final sqlCreatedTableActivity = '''
     CREATE TABLE tbl_activity(
-      id_activity TEXT PRIMARY KEY,
+      id_activity INTEGER PRIMARY KEY AUTOINCREMENT,
       title_activity TEXT,
       datetime_activity TEXT,
       is_done_activity INTEGER,
@@ -29,7 +29,7 @@ class DBHelper {
     ''';
     final sqlCreateTableCategory = '''
     CREATE TABLE tbl_category(
-      id_category TEXT PRIMARY KEY,
+      id_category INTEGER PRIMARY KEY AUTOINCREMENT,
       title_category TEXT,
       code_icon_category INTEGER,
       information_category TEXT,
@@ -41,6 +41,25 @@ class DBHelper {
     print('Table Has Been Created');
   }
 
+  Future<int> getLastInsertIdActivity() async {
+    final db = await database();
+    final result = await db.rawQuery(
+        "SELECT id_activity from tbl_activity ORDER BY id_activity DESC LIMIT 1");
+    final id = result.isEmpty ? 0 : result.first['id_activity'] as int;
+    print("From Map<sTRING,DYNAMIC>  ID $id");
+    return id + 1;
+  }
+
+  //TODO Memunculkan Last ID untuk Category , Untuk Activity Done
+  Future<int> getLastInsertIdCategory() async {
+    final db = await database();
+    final result = await db.rawQuery(
+        "SELECT id_category from tbl_category ORDER BY id_category DESC LIMIT 1");
+    final id = result.isEmpty ? 0 : result.first['id_category'] as int;
+    print("From Map<sTRING,DYNAMIC>  ID $id");
+    return id + 1;
+  }
+
   Future<int> insertCategory(CategoryModel model) async {
     final db = await database();
     final result = await db.insert(
@@ -50,7 +69,7 @@ class DBHelper {
     return result;
   }
 
-  Future<int> deleteCategory(String idCategory) async {
+  Future<int> deleteCategory(int idCategory) async {
     String where = 'id_category = ?';
     List<dynamic> whereArgs = [idCategory];
     final db = await database();
@@ -63,7 +82,7 @@ class DBHelper {
     return result;
   }
 
-  Future<int> updateIconCategory(int newCodeIcon, String idCategory) async {
+  Future<int> updateIconCategory(int newCodeIcon, int idCategory) async {
     final db = await database();
     final result = await db.rawUpdate(
       '''
@@ -79,7 +98,7 @@ class DBHelper {
   Future<int> updateCategory({
     String titleCategory,
     String informationCategory,
-    String idCategory,
+    int idCategory,
   }) async {
     final db = await database();
     final result = await db.rawUpdate(
@@ -123,7 +142,7 @@ class DBHelper {
     @required String dateTimeActivity,
     @required String informationActivity,
     @required int codeIconActivity,
-    @required String idActivity,
+    @required int idActivity,
   }) async {
     final db = await database();
     final result = await db.rawUpdate('''
@@ -142,7 +161,7 @@ class DBHelper {
   }
 
   Future<int> updateStatusActivityOnTapCheckBox(
-    String idActivity,
+    int idActivity,
     int valueCheckBox,
   ) async {
     int updateStatusActivity = valueCheckBox;
@@ -173,7 +192,7 @@ class DBHelper {
     return result;
   }
 
-  Future<int> deleteActivityByIdActivity(String idActivity) async {
+  Future<int> deleteActivityByIdActivity(int idActivity) async {
     String where = 'id_activity = ?';
     List<dynamic> whereArgs = [idActivity];
     final db = await database();

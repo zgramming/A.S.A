@@ -27,7 +27,6 @@ class _AddCategoryState extends State<AddCategory> {
     if (form.validate()) {
       form.save();
       ctgProvider.addingCategory(
-        idCategory: dateNow.toIso8601String(),
         titleCategory: titleForm,
         codeIconCategory: ctgProvider.iconCodeFromIconPicker,
         informationCategory: informationForm,

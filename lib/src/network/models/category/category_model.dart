@@ -1,5 +1,5 @@
 class CategoryModel {
-  String idCategory;
+  int idCategory;
   String titleCategory;
   int codeIconCategory;
   String informationCategory;

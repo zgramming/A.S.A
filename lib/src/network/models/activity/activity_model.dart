@@ -1,5 +1,5 @@
 class ActivityModel {
-  String idActivity;
+  int idActivity;
   String titleActivity;
   String dateTimeActivity;
   int isDoneActivity;

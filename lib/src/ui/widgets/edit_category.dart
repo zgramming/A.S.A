@@ -150,7 +150,7 @@ class _EditCategoryState extends State<EditCategory> {
     );
   }
 
-  void _pickIcon(CategoryProvider ctgProvider, String idCategory) async {
+  void _pickIcon(CategoryProvider ctgProvider, int idCategory) async {
     final openIconPicker = await FlutterIconPicker.showIconPicker(
       context,
       iconSize: 40,
@@ -171,7 +171,7 @@ class _EditCategoryState extends State<EditCategory> {
 
   void _validate({
     @required CategoryProvider ctgProvider,
-    @required String idCategory,
+    @required int idCategory,
   }) async {
     final form = _formKey.currentState;
     if (form.validate()) {

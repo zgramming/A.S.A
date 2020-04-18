@@ -104,7 +104,6 @@ class MainCalendarProvider extends ChangeNotifier {
 
   /// Addung Activity Function
   Future<void> addingActivity({
-    @required String idActivity,
     @required String titleActivity,
     @required String dateTimeActivity,
     @required int isDoneActivity,
@@ -112,37 +111,43 @@ class MainCalendarProvider extends ChangeNotifier {
     @required String informationActivity,
     @required String createdDateActivity,
   }) async {
-    final newActivity = ActivityModel(
-      idActivity: idActivity,
-      titleActivity: titleActivity,
-      dateTimeActivity: dateTimeActivity,
-      isDoneActivity: isDoneActivity,
-      codeIconActivity: codeIconActivity,
-      informationActivity: informationActivity,
-      createdDateActivity: createdDateActivity,
-    );
-    await db.insertActivity(newActivity);
+    try {
+      final lastId = await db.getLastInsertIdActivity();
+      final newActivity = ActivityModel(
+        idActivity: lastId,
+        titleActivity: titleActivity,
+        dateTimeActivity: dateTimeActivity,
+        isDoneActivity: isDoneActivity,
+        codeIconActivity: codeIconActivity,
+        informationActivity: informationActivity,
+        createdDateActivity: createdDateActivity,
+      );
+      await db.insertActivity(newActivity);
 
-    /// Insert Data To All Activity List
-    _unFinishedActivityItem.add(newActivity);
+      /// Insert Data To All Activity List
+      _unFinishedActivityItem.add(newActivity);
 
-    /// Adding Activity To SelectedActivity
-    _selectedActivityItem.add(newActivity);
+      /// Adding Activity To SelectedActivity
+      _selectedActivityItem.add(newActivity);
 
-    /// Load Data From SQFLite
-    _nearby10ActivityItem = await db.fetch10Activity();
+      /// Load Data From SQFLite
+      _nearby10ActivityItem = await db.fetch10Activity();
 
-    /// Refresh Count In Calendar
-    _activityBasedOnDate = await getActivityBasedOnDate();
+      /// Refresh Count In Calendar
+      _activityBasedOnDate = await getActivityBasedOnDate();
 
-    /// Sorting The SelectedItem
-    sortSelectedItemActivity();
+      /// Sorting The SelectedItem
+      sortSelectedItemActivity();
 
-    /// Reset Calendar
-    resetSelectedDateFromCupertinoDatePicker();
+      /// Reset Calendar
+      resetSelectedDateFromCupertinoDatePicker();
 
-    /// Update The UI
-    notifyListeners();
+      /// Update The UI
+      notifyListeners();
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 
   Future<void> updateActivity({
@@ -150,7 +155,7 @@ class MainCalendarProvider extends ChangeNotifier {
     @required String dateTimeActivity,
     @required String informationActivity,
     @required int codeIconActivity,
-    @required String idActivity,
+    @required int idActivity,
   }) async {
     await db.updateActivity(
       titleActivity: titleActivity,
@@ -200,7 +205,7 @@ class MainCalendarProvider extends ChangeNotifier {
   /// Cari Berdasarkan Statusnya = 0 dan idActivitynya sama dengan yang di select
   /// Lalu Urutkan List berdasarkan tanggal dan status ASCENDING, diurutkan berdasarkan status apabila ada kasus terdapat 3 aktifitas apabila hanya diurutkan berdasarkan
   /// tanggal saja , aktifitas yang masih belum selesai (status=0) akan ikut terurut kebawah karena pengurutan hanya berdasarkan tanggal.
-  Future<void> updateStatusOnTapCheckBox(String idActivity, bool value) async {
+  Future<void> updateStatusOnTapCheckBox(int idActivity, bool value) async {
     /// Menconvert Status dari INT ke Bool, Karena SQFLite tidak support boolean
     final result = value ? 1 : 0;
 
@@ -263,7 +268,7 @@ class MainCalendarProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteActivityById(String idActivity) async {
+  Future<void> deleteActivityById(int idActivity) async {
     await db.deleteActivityByIdActivity(idActivity);
 
     ///Refresh Activity

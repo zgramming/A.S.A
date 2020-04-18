@@ -8,20 +8,23 @@ class ButtonCustom extends StatelessWidget {
   final Color buttonColor;
   final String buttonTitle;
   final double buttonSize;
+  final EdgeInsetsGeometry padding;
   ButtonCustom({
     this.onPressed,
-    this.buttonColor = Colors.grey,
+    this.buttonColor,
     this.buttonTitle = "Selesai",
     this.buttonSize = 1,
+    this.padding,
   });
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      padding: padding,
       width: sizes.width(context) / buttonSize,
       child: RaisedButton(
         onPressed: onPressed,
         textTheme: ButtonTextTheme.primary,
-        color: colorPallete.buttonDynamicColor(context),
+        color: buttonColor ?? colorPallete.buttonDynamicColor(context),
         child: Text(
           buttonTitle,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),

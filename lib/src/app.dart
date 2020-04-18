@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
         const Locale('id', 'ID'),
       ],
       home: SplashScreen(),
+      // home: TestingScreen(),
       routes: {
         SplashScreen.routeNamed: (context) => SplashScreen(),
         WelcomeScreen.routeName: (context) => WelcomeScreen(),

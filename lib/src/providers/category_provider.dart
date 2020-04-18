@@ -34,14 +34,14 @@ class CategoryProvider extends ChangeNotifier {
   List<CategoryModel> get allCategoryItem => [..._allCategoryItem];
 
   Future<void> addingCategory({
-    @required String idCategory,
     @required String titleCategory,
     @required int codeIconCategory,
     @required String informationCategory,
     @required String createDate,
   }) async {
+    final lastInsertId = await db.getLastInsertIdCategory();
     final newCategory = CategoryModel(
-      idCategory: idCategory,
+      idCategory: lastInsertId,
       titleCategory: titleCategory,
       codeIconCategory: codeIconCategory,
       informationCategory: informationCategory,
@@ -62,7 +62,7 @@ class CategoryProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteCategory({@required String idCategory}) async {
+  Future<void> deleteCategory({@required int idCategory}) async {
     await db.deleteCategory(idCategory);
 
     /// Remove Category Where Idcategory =idCategory
@@ -70,7 +70,7 @@ class CategoryProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateIconCategory(int newCodeIcon, String idCategory) async {
+  Future<void> updateIconCategory(int newCodeIcon, int idCategory) async {
     await db.updateIconCategory(newCodeIcon, idCategory);
 
     /// Find Category where idCategory =idCategory
@@ -83,7 +83,7 @@ class CategoryProvider extends ChangeNotifier {
   }
 
   Future<void> updateCategory({
-    @required String idCategory,
+    @required int idCategory,
     @required String titleCategory,
     @required String informationCategory,
   }) async {

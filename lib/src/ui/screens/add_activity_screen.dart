@@ -79,7 +79,6 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
         if (editArgs == null) {
           /// Ini Buat Tambah Activity
           await mcProvider.addingActivity(
-            idActivity: dateNow.toString(),
             titleActivity: titleForm,
             dateTimeActivity:
                 mcProvider.selectedDateFromCupertinoDatePicker.toString(),
