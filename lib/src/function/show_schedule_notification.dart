@@ -22,11 +22,12 @@ class ShowNotificationSchedule {
       idNotification.toString(),
       titleNotification,
       bodyNotification,
-      priority: Priority.Max,
+      priority: Priority.High,
       importance: Importance.Max,
       color: colorPallete.primaryColor,
-      ongoing: true,
-      ticker: 'ticker',
+
+      ///! Berfungsi agar saat body text terlalu panjang, memunculkan expanded icon.
+      styleInformation: BigTextStyleInformation(''),
     );
 
     IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
@@ -53,6 +54,7 @@ class ShowNotificationSchedule {
 
   ///! Should Be Initialize First Before used flutter local notification
   void initLocalNotification() async {
+    //TODO Check Disini Kalau Notifikasi Error
     _androidInitializationSettings = AndroidInitializationSettings('app_icon');
     _iosInitializationSettings = IOSInitializationSettings(
       onDidReceiveLocalNotification: _onDidReceiveLocalNotification,

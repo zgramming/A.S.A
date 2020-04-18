@@ -41,12 +41,6 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
 
   ShowNotificationSchedule notificationSchedule = ShowNotificationSchedule();
   @override
-  void initState() {
-    super.initState();
-    notificationSchedule.initLocalNotification();
-  }
-
-  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     checkArgs();
