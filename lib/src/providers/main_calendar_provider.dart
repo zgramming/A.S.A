@@ -103,7 +103,7 @@ class MainCalendarProvider extends ChangeNotifier {
   }
 
   /// Addung Activity Function
-  Future<void> addingActivity({
+  Future<int> addingActivity({
     @required String titleActivity,
     @required String dateTimeActivity,
     @required int isDoneActivity,
@@ -140,10 +140,12 @@ class MainCalendarProvider extends ChangeNotifier {
       sortSelectedItemActivity();
 
       /// Reset Calendar
-      resetSelectedDateFromCupertinoDatePicker();
+      //TODO Sementara Dihilangkan dulu fungsi reset calendar , Untuk membuat Notifikasi
+      // resetSelectedDateFromCupertinoDatePicker();
 
       /// Update The UI
       notifyListeners();
+      return lastId;
     } catch (e) {
       print(e);
       return null;

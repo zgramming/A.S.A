@@ -11,9 +11,14 @@ import '../widgets/popUpDialog.dart';
 import '../../providers/main_calendar_provider.dart';
 import '../../ui/screens/add_activity_screen.dart';
 import '../../network/models/activity/activity_model.dart';
+import '../../function/show_schedule_notification.dart';
 
 class OperationCalendarList extends StatelessWidget {
   final ActivityModel activityModel;
+
+  final ShowNotificationSchedule notificationSchedule =
+      ShowNotificationSchedule();
+
   OperationCalendarList({@required this.activityModel});
   @override
   Widget build(BuildContext context) {
@@ -56,9 +61,16 @@ class OperationCalendarList extends StatelessWidget {
                                     'Kamu Yakin Ingin Menghapus Aktifitas ini ?',
                                 onTap: () {
                                   int count = 0;
-                                  mcProvider.deleteActivityById(
-                                    activityModel.idActivity,
-                                  );
+                                  mcProvider
+                                      .deleteActivityById(
+                                        activityModel.idActivity,
+                                      )
+                                      .then(
+                                        (_) => notificationSchedule
+                                            .cancelNotificationById(
+                                          activityModel.idActivity,
+                                        ),
+                                      );
 
                                   /// Akan Melakukan Pop Sampai 2 Kali [Menutup Dialog dan ShowBottomSheet]
                                   Navigator.popUntil(

@@ -18,6 +18,8 @@ import '../../providers/main_calendar_provider.dart';
 import '../../network/models/activity/activity_model.dart';
 import '../../function/show_snackbar_message.dart';
 
+import '../../function/show_schedule_notification.dart';
+
 class AddActivityScreen extends StatefulWidget {
   static String routeName = '/add-activity-screen';
 
@@ -35,6 +37,13 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
   ActivityModel editArgs;
   DateTime dateTimeActivityArgs;
 
+  ShowNotificationSchedule notificationSchedule = ShowNotificationSchedule();
+  @override
+  void initState() {
+    super.initState();
+    notificationSchedule.initLocalNotification();
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -44,13 +53,13 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
   void checkArgs() async {
     final args = ModalRoute.of(context).settings.arguments;
     if (args == null) {
-      print('Args Is Null');
+      // print('Args Is Null');
       appBarTitle = 'Tambah Aktifitas';
       titleForm = '';
       informationForm = '';
       return null;
     } else {
-      print('Args is available');
+      // print('Args is available');
       appBarTitle = 'Edit Aktifitas';
       editArgs = args;
       titleForm = editArgs.titleActivity;
@@ -78,7 +87,8 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
         form.save();
         if (editArgs == null) {
           /// Ini Buat Tambah Activity
-          await mcProvider.addingActivity(
+
+          final resultLastId = await mcProvider.addingActivity(
             titleActivity: titleForm,
             dateTimeActivity:
                 mcProvider.selectedDateFromCupertinoDatePicker.toString(),
@@ -87,18 +97,39 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
             informationActivity: informationForm,
             createdDateActivity: dateNow.toString(),
           );
+
+          await showNotificationSchedule.showNotificationSchedule(
+            dateTimeShowNotification:
+                mcProvider.selectedDateFromCupertinoDatePicker,
+            idNotification: resultLastId,
+            titleNotification: titleForm,
+            bodyNotification: "Informasi Aktifitas : $informationForm",
+            payloadNotification: "Saat Notifikasi Diklik",
+          );
         } else {
           /// Ini Buat Edit Activity
-          await mcProvider.updateActivity(
-            titleActivity: titleForm,
-            dateTimeActivity:
-                mcProvider.selectedDateFromCupertinoDatePicker.toString(),
-            informationActivity: informationForm,
-            codeIconActivity: ctgProvider.selectedIconCodeCardCategory == 59566
-                ? codeIconActivity
-                : ctgProvider.selectedIconCodeCardCategory,
-            idActivity: editArgs.idActivity,
-          );
+          await mcProvider
+              .updateActivity(
+                titleActivity: titleForm,
+                dateTimeActivity:
+                    mcProvider.selectedDateFromCupertinoDatePicker.toString(),
+                informationActivity: informationForm,
+                codeIconActivity:
+                    ctgProvider.selectedIconCodeCardCategory == 59566
+                        ? codeIconActivity
+                        : ctgProvider.selectedIconCodeCardCategory,
+                idActivity: editArgs.idActivity,
+              )
+              .then((_) => showNotificationSchedule
+                  .cancelNotificationById(editArgs.idActivity))
+              .then((_) => showNotificationSchedule.showNotificationSchedule(
+                    dateTimeShowNotification:
+                        mcProvider.selectedDateFromCupertinoDatePicker,
+                    idNotification: editArgs.idActivity,
+                    titleNotification: titleForm,
+                    bodyNotification: informationForm,
+                    payloadNotification: "Saat Notifikasi Diklik Update",
+                  ));
         }
         ctgProvider.resetSelectedIndexAndIconCodeCardCategory();
         mcProvider.resetSelectedDateFromCupertinoDatePicker();
@@ -187,6 +218,8 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                                               .setSelectedDateFromCupertinoDatePicker(
                                             dateChange,
                                           );
+                                          print(
+                                              "DateTime From DatePicker : ${mcProvider.selectedDateFromCupertinoDatePicker}");
                                         },
                                       ),
                                     ),
