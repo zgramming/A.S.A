@@ -25,6 +25,8 @@ class ShowNotificationSchedule {
       priority: Priority.Max,
       importance: Importance.Max,
       color: colorPallete.primaryColor,
+      ongoing: true,
+      ticker: 'ticker',
     );
 
     IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
