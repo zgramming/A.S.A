@@ -25,9 +25,11 @@ class ButtonCustom extends StatelessWidget {
         onPressed: onPressed,
         textTheme: ButtonTextTheme.primary,
         color: buttonColor ?? colorPallete.buttonDynamicColor(context),
-        child: Text(
-          buttonTitle,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        child: FittedBox(
+          child: Text(
+            buttonTitle,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          ),
         ),
       ),
     );

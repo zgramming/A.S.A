@@ -1,4 +1,7 @@
 class AppConfig {
+  final String urlApplication =
+      "https://play.google.com/store/apps/details?id=id.zeffry.atur_semua_aktifitas";
+
   final String tableCategory = 'tbl_category';
   final String tableActivity = 'tbl_activity';
   final String tableAppTheme = 'tbl_app_theme';

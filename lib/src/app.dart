@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkMode = Provider.of<AppThemeProvider>(context).isDarkMode;
     return MaterialApp(
-      title: 'Organize Your Activity',
+      title: 'Atur Semua Aktifitas',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: colorPallete.primaryColor,
@@ -41,8 +41,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         const Locale('id', 'ID'),
       ],
-      home: SplashScreen(),
       // home: TestingScreen(),
+      home: SplashScreen(),
       routes: {
         SplashScreen.routeNamed: (context) => SplashScreen(),
         WelcomeScreen.routeName: (context) => WelcomeScreen(),
