@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:launch_review/launch_review.dart';
+import 'package:system_setting/system_setting.dart';
 
 import '../../providers/category_provider.dart';
 import '../../providers/app_theme_provider.dart';
@@ -87,6 +88,16 @@ class SettingsScreen extends StatelessWidget {
                                     builder: (smbContext) => EditCategory(),
                                   ),
                         ),
+                      ),
+                      Divider(color: colorPallete.dividerDynamicColor(context)),
+                      listTileSettings(
+                        icon: Icons.notification_important,
+                        title: "Notifikasi Setting",
+                        subtitle:
+                            "Membuka notifikas setting untuk konfigurasi suara,getaran,dan LED",
+                        context: context,
+                        onTap: () =>
+                            SystemSetting.goto(SettingTarget.NOTIFICATION),
                       ),
                       Divider(color: colorPallete.dividerDynamicColor(context)),
                       listTileSettings(

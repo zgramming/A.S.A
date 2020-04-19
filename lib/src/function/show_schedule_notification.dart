@@ -40,9 +40,9 @@ class ShowNotificationSchedule {
 
       ///! Configurasi LED
       enableLights: true,
-      ledColor: Colors.blue,
-      ledOnMs: 1000,
-      ledOffMs: 500,
+      ledColor: Color.fromARGB(100, 150, 100, 0),
+      ledOnMs: 10000,
+      ledOffMs: 5000,
 
       //! For Config Vibrate
       vibrationPattern: vibrationPattern,
