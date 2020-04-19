@@ -1,7 +1,9 @@
-import 'package:atur_semua_aktifitas/src/ui/variable/colors/color_pallete.dart';
+import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/material.dart';
+
+import '../ui/variable/colors/color_pallete.dart';
 
 class ShowNotificationSchedule {
   FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
@@ -17,6 +19,11 @@ class ShowNotificationSchedule {
     @required String bodyNotification,
     @required String payloadNotification,
   }) async {
+    var vibrationPattern = Int64List(4);
+    vibrationPattern[0] = 0;
+    vibrationPattern[1] = 1000;
+    vibrationPattern[2] = 5000;
+    vibrationPattern[3] = 2000;
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
       idNotification.toString(), titleNotification, bodyNotification,
@@ -24,17 +31,22 @@ class ShowNotificationSchedule {
       importance: Importance.Max,
       color: colorPallete.primaryColor,
 
-      ///! Berfungsi untuk mengatur suara notifikasi
+      ///! For config Sound Notification
       sound: RawResourceAndroidNotificationSound('slow_spring_board'),
+      playSound: true,
 
-      ///! Berfungsi agar saat body text terlalu panjang, memunculkan expanded icon.
+      ///! For Showing Long Text and append expanded icon
       styleInformation: BigTextStyleInformation(''),
 
       ///! Configurasi LED
       enableLights: true,
-      ledColor: const Color.fromARGB(255, 255, 0, 0),
+      ledColor: Colors.blue,
       ledOnMs: 1000,
       ledOffMs: 500,
+
+      //! For Config Vibrate
+      vibrationPattern: vibrationPattern,
+      enableVibration: true,
     );
 
     IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
