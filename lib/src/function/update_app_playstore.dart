@@ -1,5 +1,4 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:in_app_update/in_app_update.dart';
 
 class UpdateAppPlaystore {
   final String firebaseRemoteKey = "android_build_version";
@@ -15,15 +14,6 @@ class UpdateAppPlaystore {
     } else {
       print('Sudah Paling Baru');
       return false;
-    }
-  }
-
-  Future<void> showUpdateApp() async {
-    try {
-      InAppUpdate.performImmediateUpdate();
-    } catch (e) {
-      print('Error : ${e.toString()}');
-      return null;
     }
   }
 }
