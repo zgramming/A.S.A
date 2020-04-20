@@ -1,8 +1,10 @@
-import 'package:atur_semua_aktifitas/src/function/go_to.dart';
-import 'package:atur_semua_aktifitas/src/ui/variable/colors/color_pallete.dart';
-import 'package:atur_semua_aktifitas/src/ui/variable/sizes/sizes.dart';
-import 'package:atur_semua_aktifitas/src/ui/widgets/button_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../function/go_to.dart';
+import '../../ui/variable/colors/color_pallete.dart';
+import '../../ui/variable/sizes/sizes.dart';
+import '../../ui/widgets/button_custom.dart';
 
 class UpdateAppScreen extends StatefulWidget {
   @override
@@ -96,7 +98,7 @@ class _UpdateAppScreenState extends State<UpdateAppScreen>
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       ButtonCustom(
-                        onPressed: () => Navigator.of(context).pop(true),
+                        onPressed: () => SystemNavigator.pop(),
                         buttonSize: 2.5,
                         padding: EdgeInsets.all(4),
                         buttonTitle: 'Keluar',
