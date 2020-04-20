@@ -96,7 +96,7 @@ class _UpdateAppScreenState extends State<UpdateAppScreen>
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       ButtonCustom(
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () => Navigator.of(context).pop(true),
                         buttonSize: 2.5,
                         padding: EdgeInsets.all(4),
                         buttonTitle: 'Keluar',
@@ -117,27 +117,31 @@ class _UpdateAppScreenState extends State<UpdateAppScreen>
               ),
             ),
           ),
-          AnimatedBuilder(
-            animation: _imageController,
-            child: Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(
-                bottom: _imageAnimation.value,
-                top: sizes.height(context) / 12,
-              ),
-              child: Image.asset(
-                'assets/images/update_app.png',
-                height: sizes.height(context) / 2.5,
-              ),
-            ),
-            builder: (context, child) => Container(
-              margin: EdgeInsets.only(
-                bottom: _imageAnimation.value,
-              ),
-              child: child,
-            ),
-          ),
+          buildAnimatedRocket(context),
         ],
+      ),
+    );
+  }
+
+  AnimatedBuilder buildAnimatedRocket(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _imageController,
+      child: Container(
+        alignment: Alignment.center,
+        margin: EdgeInsets.only(
+          bottom: _imageAnimation.value,
+          top: sizes.height(context) / 12,
+        ),
+        child: Image.asset(
+          'assets/images/update_app.png',
+          height: sizes.height(context) / 2.5,
+        ),
+      ),
+      builder: (context, child) => Container(
+        margin: EdgeInsets.only(
+          bottom: _imageAnimation.value,
+        ),
+        child: child,
       ),
     );
   }

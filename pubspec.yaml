@@ -12,7 +12,7 @@ description: A.S.A Aplikasi mengatur semua aktifitasmu menjadi lebih mudah
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # version: 1.1.9+6
-version: 1.2.2+8
+version: 1.2.3+9
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
@@ -82,11 +82,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Lobster
-      fonts:
-        - asset: assets/fonts/header/Lobster-Regular.ttf
-    #       - asset: fonts/Schyler-Italic.ttf
-    #         style: italic
     - family: Cabin
       fonts:
         - asset: assets/fonts/body/Cabin-Regular.ttf

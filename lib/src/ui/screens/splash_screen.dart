@@ -33,8 +33,8 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Consumer<GlobalProvider>(
         builder: (_, globalProvider, __) => FutureBuilder(
-          future: updateAppPlaystore.isNeedUpdate("6"),
-          // future: updateAppPlaystore.isNeedUpdate(globalProvider.projectCode),
+          // future: updateAppPlaystore.isNeedUpdate("6"),
+          future: updateAppPlaystore.isNeedUpdate(globalProvider.projectCode),
           builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       locationImage: appConfig.locationImageSplashScreen,
                       imageHeight: 2.5,
                     ),
-                    duration: 1000,
+                    duration: 2,
                     navigateAfterSplashScreen: WelcomeScreen(),
                   );
                 }
