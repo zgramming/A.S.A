@@ -1,5 +1,8 @@
+<p align="center">
+  <img src="https://github.com/zgramming/A.S.A/blob/master/banner_github_asa.png" height="300" >
+</p> 
+  
 # A.S.A
-
 A.S.A Aplikasi mengatur semua aktifitasmu menjadi lebih mudah
 
 ### Database 
