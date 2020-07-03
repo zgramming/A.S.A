@@ -20,7 +20,6 @@ import '../../network/models/activity/activity_model.dart';
 import '../../function/show_snackbar_message.dart';
 import '../../function/show_schedule_notification.dart';
 
-import '../screens/welcome_screen.dart';
 
 class AddActivityScreen extends StatefulWidget {
   static String routeName = '/add-activity-screen';

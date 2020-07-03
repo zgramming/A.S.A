@@ -74,8 +74,7 @@ class CategoryProvider extends ChangeNotifier {
     await db.updateIconCategory(newCodeIcon, idCategory);
 
     /// Find Category where idCategory =idCategory
-    final result =
-        _allCategoryItem.where((element) => element.idCategory == idCategory);
+    final result = _allCategoryItem.where((element) => element.idCategory == idCategory);
 
     /// After We Get it, update old icon to new icon
     result.forEach((element) => element.codeIconCategory = newCodeIcon);
@@ -94,8 +93,7 @@ class CategoryProvider extends ChangeNotifier {
     );
 
     /// Find Category where idCategory =idCategory
-    final result =
-        _allCategoryItem.where((element) => element.idCategory == idCategory);
+    final result = _allCategoryItem.where((element) => element.idCategory == idCategory);
 
     /// After We Get it, update Title & Information Category with new one
     result.forEach((element) {
