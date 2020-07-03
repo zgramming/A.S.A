@@ -50,6 +50,7 @@ android {
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -62,6 +63,7 @@ android {
    }
    buildTypes {
        release {
+        //    signingConfig signingConfigs.release
            signingConfig signingConfigs.release
            // Enables code shrinking, obfuscation, and optimization for only
            // your project's release build type.
@@ -77,6 +79,9 @@ android {
             proguardFiles getDefaultProguardFile(
                     'proguard-android-optimize.txt'),
                     'proguard-rules.pro'
+       }
+       debug{
+            minifyEnabled true
        }
    }
 }
